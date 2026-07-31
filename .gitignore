@@ -1,15 +1,24 @@
+# Временные файлы сборки и кэш
+.gradle/
+/build/
+/app/build/
+.artifacts/
+.cxx/
+.externalNativeBuild/
+
+# Настройки Android Studio / IntelliJ IDEA
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*.ipr
+*.iws
+
+# Локальные конфигурации
 local.properties
+
+# Логи и захваты экрана/профайлера
+/captures/
+*.log
+
+# Системные файлы macOS / Windows
+.DS_Store
+Thumbs.db
