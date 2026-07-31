@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="calc_btn_zero">0</string>
+    <string name="calc_btn_one">1</string>
+    <string name="calc_btn_two">2</string>
+    <string name="calc_btn_three">3</string>
+    <string name="calc_btn_four">4</string>
+    <string name="calc_btn_five">5</string>
+    <string name="calc_btn_six">6</string>
+    <string name="calc_btn_seven">7</string>
+    <string name="calc_btn_eight">8</string>
+    <string name="calc_btn_nine">9</string>
+    <string name="calc_btn_dot">.</string>
+    <string name="calc_btn_equals">=</string>
+    <string name="calc_btn_plus">+</string>
+    <string name="calc_btn_minus">—</string>
+    <string name="calc_btn_division">/</string>
+    <string name="calc_btn_percent">%</string>
+    <string name="calc_btn_multiply">X</string>
+    <string name="calc_btn_ac">AC</string>
+    <string name="calc_btn_plus_minus">+/-</string>
+    <string name="calc_btn_special_second">2nd</string>
+    <string name="calc_btn_special_deg">deg</string>
+    <string name="calc_btn_special_sin">sin</string>
+    <string name="calc_btn_special_cos">cos</string>
+    <string name="calc_btn_special_tan">tan</string>
+    <string name="calc_btn_special_lg">lg</string>
+    <string name="calc_btn_special_ln">ln</string>
+    <string name="calc_btn_special_open_parenthesis">(</string>
+    <string name="calc_btn_special_close_parenthesis">)</string>
+    <string name="calc_btn_special_factorial">x!</string>
+    <string name="calc_btn_special_exponent_negative_one">1/x</string>
+    <string name="calc_btn_special_pi">π</string>
+    <string name="calc_btn_special_exponent_e">e</string>
+    <string name="calculator_toolbar">Калькулятор</string>
+    <string name="menu_history">Меню</string>
+    <string name="converter">Конвертер</string>
+    <string name="pull_to_history">↓ Потяните вниз для просмотра истории.</string>
+    <string name="release_for_history">↓ Отпустите для просмотра истории.</string>
+</resources>

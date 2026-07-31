@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="calc_btn_margin">4dp</dimen>
+    <dimen name="calc_btn_margin_vertical">12dp</dimen>
+    <dimen name="calc_btn_text_size">28sp</dimen>
+    <dimen name="calc_zero_padding_start">32dp</dimen>
+    <dimen name="calc_btn_height">72dp</dimen>
+    <dimen name="zero">0dp</dimen>
+</resources>
