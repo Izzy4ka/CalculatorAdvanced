@@ -1,1 +1,1 @@
-![CI Status](https://github.com/ВашЛогин/ВашРепозиторий/actions/workflows/android.yml/badge.svg)
+![CI Status](https://github.com/Izzy4ka/CalculatorAdvanced/actions/workflows/android.yml/badge.svg)
