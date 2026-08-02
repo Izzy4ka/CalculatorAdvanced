@@ -7,446 +7,319 @@
     android:background="@color/calc_background"
     tools:context=".ui.fragment.CalculatorFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/btn_minimize"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:tint="#FFFFFF"
+        tools:ignore="MissingPrefix" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
+    <TextView
+        android:id="@+id/tv_calculator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Калькулятор"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_minimize"
+        app:layout_constraintEnd_toStartOf="@+id/tv_converter"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_minimize" />
 
-            <TextView
-                android:id="@+id/tv_toolbar_calc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/calculator_toolbar"
-                android:textColor="@android:color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tv_converter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Конвертер"
+        android:textColor="#666666"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_minimize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_calculator"
+        app:layout_constraintTop_toTopOf="@+id/btn_minimize" />
 
-            <TextView
-                android:id="@+id/tv_toolbar_converter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/converter"
-                android:textColor="#80FFFFFF"
-                android:textSize="22sp" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/btn_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/menu_history"
-                android:padding="8dp"
-                app:tint="@android:color/white" />
-        </LinearLayout>
-    </com.google.android.material.appbar.MaterialToolbar>
+    <ImageView
+        android:id="@+id/btn_more"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_history"
+        android:id="@+id/rv_history"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintVertical_bias="0.3"
-        android:nestedScrollingEnabled="true"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:stackFromEnd="true"
+        tools:itemCount="3"
+        app:layout_constraintBottom_toTopOf="@+id/tv_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_minimize"
         tools:listitem="@layout/item_calculate"
-        app:layout_constraintBottom_toTopOf="@id/tv_result"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        />
 
     <TextView
         android:id="@+id/tv_result"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:gravity="bottom|end"
-        android:text="@string/calc_btn_zero"
-        android:textColor="@android:color/white"
-        android:textSize="64sp"
-        app:autoSizeMaxTextSize="64sp"
-        app:autoSizeMinTextSize="24sp"
-        app:autoSizeStepGranularity="2sp"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@id/flow_calculate"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start" />
+        android:includeFontPadding="false"
+        android:layout_marginEnd="0dp"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="72sp"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
+        app:layout_constraintEnd_toEndOf="@+id/keyboard_flow"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_calculate"
+        android:id="@+id/keyboard_flow"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="btn_special_second,btn_special_deg,btn_special_sin,btn_special_cos,btn_special_tan,btn_special_exponent,btn_special_lg,btn_special_ln,btn_special_open_parenthesis,btn_special_close_parenthesis,btn_special_square_root,btn_ac,btn_plus_minus,btn_percent,btn_division,btn_special_factorial,btn_seven,btn_eight,btn_nine,btn_multiply,btn_special_exponent_negative_one,btn_four,btn_five,btn_six,btn_minus,btn_special_pi,btn_one,btn_two,btn_three,btn_plus,btn_transform,btn_special_exponent_e,btn_zero,btn_dot,btn_equals"
-        app:flow_verticalGap="@dimen/calc_btn_margin_vertical"
-        app:flow_horizontalGap="@dimen/calc_btn_margin"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="btn_2nd,btn_deg,btn_sin,btn_cos,btn_tan,btn_pow,btn_lg,btn_ln,btn_open,btn_close,btn_sqrt,btn_ac,btn_del,btn_percent,btn_divide,btn_fact,btn_7,btn_8,btn_9,btn_multiply,btn_inv,btn_4,btn_5,btn_6,btn_minus,btn_pi,btn_1,btn_2,btn_3,btn_plus,btn_expand,btn_e,btn_0,btn_comma,btn_equals"
         app:flow_maxElementsWrap="4"
-        app:flow_wrapMode="chain"
-        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_second"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_second"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_deg"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_deg"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_sin"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_sin"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_cos"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_cos"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_tan"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_tan"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_exponent"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:padding="0dp"
-        app:icon="@drawable/ic_exponent"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="32dp"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_lg"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_lg"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_ln"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_ln"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_open_parenthesis"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_open_parenthesis"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_close_parenthesis"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_close_parenthesis"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_square_root"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:padding="0dp"
-        app:icon="@drawable/ic_square_root_of_x"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="32dp"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_factorial"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_factorial"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_exponent_negative_one"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_exponent_negative_one"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_pi"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_pi"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_special_exponent_e"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_special_exponent_e"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_ac"
-        style="@style/Widget.App.CalculatorButton.FirstLine"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_ac"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_plus_minus"
-        style="@style/Widget.App.CalculatorButton.FirstLine"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_plus_minus"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_percent"
-        style="@style/Widget.App.CalculatorButton.FirstLine"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_percent"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_division"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_division"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_seven"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_seven"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_eight"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_eight"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_nine"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_nine"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_multiply"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_multiply"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_four"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_four"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_five"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_five"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_six"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_six"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_minus"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_minus"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_one"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_one"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_two"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_two"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_three"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_three"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_plus"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_plus"
-        app:layout_constraintDimensionRatio="H,1:1"
-        tools:ignore="VisualLintButtonSize" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_transform"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:padding="0dp"
-        app:icon="@drawable/ic_transform"
-        android:contentDescription="transform"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="32dp"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_zero"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_zero"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_dot"
-        style="@style/Widget.App.CalculatorButton"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_dot"
-        app:layout_constraintDimensionRatio="H,1:1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_equals"
-        style="@style/Widget.App.CalculatorButton.Operation"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/calc_btn_height"
-        android:text="@string/calc_btn_equals"
-        app:layout_constraintDimensionRatio="H,1:1" />
+        app:flow_verticalGap="8dp"
+        app:flow_horizontalGap="0dp"
+        app:flow_wrapMode="aligned"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_scientific"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="btn_special_second,btn_special_deg,btn_special_sin,btn_special_cos,btn_special_tan,btn_special_exponent,btn_special_lg,btn_special_ln,btn_special_open_parenthesis,btn_special_close_parenthesis,btn_special_square_root,btn_special_factorial,btn_special_exponent_negative_one,btn_special_pi,btn_special_exponent_e" />
+        app:constraint_referenced_ids="
+            btn_2nd, btn_deg, btn_sin, btn_cos, btn_tan,
+            btn_pow, btn_lg, btn_ln, btn_open, btn_close,
+            btn_sqrt, btn_fact, btn_inv, btn_pi, btn_e" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_2nd"
+        style="@style/CalcButton"
+        android:text="2nd" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_deg"
+        style="@style/CalcButton"
+        android:text="deg" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sin"
+        style="@style/CalcButton"
+        android:text="sin" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cos"
+        style="@style/CalcButton"
+        android:text="cos" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_tan"
+        style="@style/CalcButton"
+        android:text="tan" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pow"
+        style="@style/CalcButton"
+        android:text="xʸ" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_lg"
+        style="@style/CalcButton"
+        android:text="lg" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ln"
+        style="@style/CalcButton"
+        android:text="ln" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_open"
+        style="@style/CalcButton"
+        android:text="(" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_close"
+        style="@style/CalcButton"
+        android:text=")" />
+
+    <!-- Строка 3 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sqrt"
+        style="@style/CalcButton"
+        android:text="√x" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ac"
+        style="@style/CalcButton"
+        android:text="AC"
+        android:textColor="#FF9800" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_del"
+        style="@style/CalcButton"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconTint="#FF9800" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_percent"
+        style="@style/CalcButton"
+        android:text="%"
+        android:textColor="#FF9800" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_divide"
+        style="@style/CalcButton"
+        android:text="÷"
+        android:textColor="#FF9800"
+        android:textSize="28sp" />
+
+    <!-- Строка 4 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_fact"
+        style="@style/CalcButton"
+        android:text="x!" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_7"
+        style="@style/CalcButton"
+        android:text="7"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_8"
+        style="@style/CalcButton"
+        android:text="8"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_9"
+        style="@style/CalcButton"
+        android:text="9"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_multiply"
+        style="@style/CalcButton"
+        android:text="×"
+        android:textColor="#FF9800"
+        android:textSize="28sp" />
+
+    <!-- Строка 5 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_inv"
+        style="@style/CalcButton"
+        android:text="1/x" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_4"
+        style="@style/CalcButton"
+        android:text="4"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_5"
+        style="@style/CalcButton"
+        android:text="5"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_6"
+        style="@style/CalcButton"
+        android:text="6"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_minus"
+        style="@style/CalcButton"
+        android:text="−"
+        android:textColor="#FF9800"
+        android:textSize="28sp" />
+
+    <!-- Строка 6 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pi"
+        style="@style/CalcButton"
+        android:text="π" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_1"
+        style="@style/CalcButton"
+        android:text="1"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_2"
+        style="@style/CalcButton"
+        android:text="2"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_3"
+        style="@style/CalcButton"
+        android:text="3"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_plus"
+        style="@style/CalcButton"
+        android:text="+"
+        android:textColor="#FF9800"
+        android:textSize="28sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_expand"
+        style="@style/CalcButton"
+        app:iconGravity="textStart"
+        app:icon="@drawable/ic_transform"
+        app:iconPadding="0dp"
+        app:iconTint="#FF9800" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_e"
+        style="@style/CalcButton"
+        android:text="e" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_0"
+        style="@style/CalcButton"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_comma"
+        style="@style/CalcButton"
+        android:text=","
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_equals"
+        style="@style/CalcButton"
+        android:text="="
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        app:backgroundTint="#FF9800" />
 </androidx.constraintlayout.widget.ConstraintLayout>
