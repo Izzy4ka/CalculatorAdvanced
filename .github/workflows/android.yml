@@ -7,31 +7,65 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  code-quality:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 1. Скачиваем код репозитория
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 2. Настраиваем Java (JDK)
+      - name: Настройка Java 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
-      - name: 3. Даем права на выполнение Gradle
+      - name: Gradle
         run: chmod +x gradlew
 
-      - name: 4. Запускаем Unit-тесты
+      - name: Ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: Detekt
+        run: ./gradlew detekt
+
+      - name: Android Lint
+        run: ./gradlew lintDebug
+
+      # --------------------------------
+
+  build-and-test:
+    needs: code-quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Настройка Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Gradle
+        run: chmod +x gradlew
+
+      - name: Unit тесты
         run: ./gradlew testDebugUnitTest
 
-      - name: 5. Собираем Debug APK
+      - name: Сборка отладочного APK
         run: ./gradlew assembleDebug
 
-      - name: 6. Сохраняем готовый APK
+      - name: Сборка релизного AAB
+        run: ./gradlew bundleRelease
+
+      - name: Сохранение Debug APK в артефакты
         uses: actions/upload-artifact@v4
         with:
-          name: calculator-debug-apk
+          name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Сохранение Release AAB в артефакты
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: app/build/outputs/bundle/release/app-release.aab
