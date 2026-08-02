@@ -10,27 +10,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.calculator.databinding.FragmentCalculatorBinding
 import com.example.calculator.ui.adapter.CalculateAdapter
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
-
 
 class CalculatorFragment : Fragment() {
-
     private lateinit var binding: FragmentCalculatorBinding
     private val adapter by lazy { CalculateAdapter() }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCalculatorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupInitialUi()
         setupListeners()
@@ -45,12 +47,13 @@ class CalculatorFragment : Fragment() {
     private fun toggleScientificKeyboard() {
         val isCurrentlyHidden = binding.groupScientific.isGone
 
-        val transition = TransitionSet().apply {
-            addTransition(ChangeBounds())
-            addTransition(Fade())
-            duration = 300
-            interpolator = AccelerateDecelerateInterpolator()
-        }
+        val transition =
+            TransitionSet().apply {
+                addTransition(ChangeBounds())
+                addTransition(Fade())
+                duration = 300
+                interpolator = AccelerateDecelerateInterpolator()
+            }
 
         TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transition)
 
