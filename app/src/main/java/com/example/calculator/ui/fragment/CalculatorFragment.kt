@@ -59,8 +59,11 @@ class CalculatorFragment : Fragment() {
 
         binding.groupScientific.isVisible = isCurrentlyHidden
         binding.keyboardFlow.setMaxElementsWrap(
-            if (isCurrentlyHidden)
-                EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT
+            if (isCurrentlyHidden) {
+                EXPANDED_FLOW_WRAP_COUNT
+            } else {
+                COLLAPSED_FLOW_WRAP_COUNT
+            },
         )
         (binding.keyboardFlow.layoutParams as ConstraintLayout.LayoutParams).apply {
             matchConstraintPercentHeight =
