@@ -44,7 +44,7 @@ ktlint {
 detekt {
     buildUponDefaultConfig = true
     allRules = false
-    config.setFrom(files("$projectDir/config/detekt/detekt.yml"))
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
 }
 
 dependencies {

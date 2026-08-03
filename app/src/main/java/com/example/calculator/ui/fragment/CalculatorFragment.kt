@@ -51,20 +51,34 @@ class CalculatorFragment : Fragment() {
             TransitionSet().apply {
                 addTransition(ChangeBounds())
                 addTransition(Fade())
-                duration = 300
+                duration = ANIMATION_DURATION_MS
                 interpolator = AccelerateDecelerateInterpolator()
             }
 
         TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transition)
 
         binding.groupScientific.isVisible = isCurrentlyHidden
-        binding.keyboardFlow.setMaxElementsWrap(if (isCurrentlyHidden) 5 else 4)
+        binding.keyboardFlow.setMaxElementsWrap(
+            if (isCurrentlyHidden)
+                EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT
+        )
         (binding.keyboardFlow.layoutParams as ConstraintLayout.LayoutParams).apply {
-            matchConstraintPercentHeight = if (isCurrentlyHidden) 0.65f else 0.45f
+            matchConstraintPercentHeight =
+                if (isCurrentlyHidden) EXPANDED_FLOW_HEIGHT_PERCENT else COLLAPSED_FLOW_HEIGHT_PERCENT
         }
     }
 
     private fun setupInitialUi() {
         binding.rvHistory.adapter = adapter
+    }
+
+    private companion object {
+        const val ANIMATION_DURATION_MS: Long = 300
+
+        const val COLLAPSED_FLOW_WRAP_COUNT = 4
+        const val EXPANDED_FLOW_WRAP_COUNT = 5
+
+        const val COLLAPSED_FLOW_HEIGHT_PERCENT = 0.55f
+        const val EXPANDED_FLOW_HEIGHT_PERCENT = 0.65f
     }
 }
