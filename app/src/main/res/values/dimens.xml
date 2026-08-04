@@ -2,9 +2,15 @@
 <resources>
     <dimen name="calc_btn_margin">4dp</dimen>
     <dimen name="calc_btn_margin_vertical">12dp</dimen>
-    <dimen name="calc_btn_text_size">28sp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+
+    <dimen name="calc_btn_text_size">24sp</dimen>
+    <dimen name="calc_btn_default_text_size">16sp</dimen>
+    <dimen name="calc_btn_functional_text_size">28sp</dimen>
+    <dimen name="default_text_size">18sp</dimen>
+    <dimen name="calculator_result_text_size">72sp</dimen>
+
+    <dimen name="calc_btn_icon_size">32dp</dimen>
+
     <dimen name="calc_zero_padding_start">32dp</dimen>
-    <dimen name="calc_btn_height">72dp</dimen>
-    <dimen name="calc_btn_height_small">52dp</dimen>
-    <dimen name="zero">0dp</dimen>
 </resources>
