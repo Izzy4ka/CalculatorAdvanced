@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/calc_background"
-    tools:context=".ui.fragment.CalculatorFragment"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.fragment.CalculatorFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <TextView
         android:id="@+id/tv_calculator"
@@ -87,7 +87,7 @@
         android:layout_marginEnd="0dp"
         android:gravity="bottom|end"
         android:includeFontPadding="false"
-        android:text="@string/calculator_zero"
+        android:text="@string/calculator_button_zero"
         android:textColor="@color/white"
         android:textSize="@dimen/calculator_result_text_size"
         app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
@@ -106,7 +106,7 @@
         app:flow_wrapMode="aligned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.55"
         app:layout_constraintStart_toEndOf="@id/guideline_start" />
 
     <androidx.constraintlayout.widget.Group
@@ -286,9 +286,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_0"
         style="@style/CalcButton.Number"
-        android:text="@string/calculator_button_zero"
         android:contentDescription="@string/calculator_description_btn_zero"
-        />
+        android:text="@string/calculator_button_zero" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_comma"

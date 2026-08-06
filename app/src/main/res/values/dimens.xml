@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="calc_btn_margin">4dp</dimen>
+    <dimen name="calc_btn_margin_horizontal">12dp</dimen>
     <dimen name="calc_btn_margin_vertical">12dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
 

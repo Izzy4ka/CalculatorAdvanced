@@ -41,13 +41,19 @@
     <string name="scientific_button_pi">π</string>
     <string name="scientific_button_euler_number">e</string>
 
+    <string name="calculator_zero">0</string>
+
     <string name="navigation_history">История</string>
     <string name="navigation_converter">Конвертер</string>
 
     <string name="calculator_button_delete">Удалить</string>
     <string name="calculator_button_expand">Открыть дополнительные функции</string>
     <string name="calculator_history_button">Открыть историю</string>
+    <string name="scientific_button_power">Степень</string>
+    <string name="scientific_button_extraction_root">Квадратный корень</string>
 
     <string name="pull_to_history">↓ Потяните вниз для просмотра истории.</string>
     <string name="release_for_history">↓ Отпустите для просмотра истории.</string>
+    <string name="calculator_description_btn_zero">Кнопка 0</string>
+    <string name="raise_power">Возвести в степень</string>
 </resources>

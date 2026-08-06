@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/calc_background"
-    tools:context=".ui.fragment.CalculatorFragment"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.fragment.CalculatorFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
@@ -87,33 +87,35 @@
         android:layout_marginEnd="0dp"
         android:gravity="bottom|end"
         android:includeFontPadding="false"
-        android:text="@string/calculator_zero"
+        android:text="@string/calculator_button_zero"
         android:textColor="@color/white"
         android:textSize="@dimen/calculator_result_text_size"
         app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/barrier_top" />
+        app:layout_constraintTop_toBottomOf="@id/barrier_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/keyboard_flow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:constraint_referenced_ids="btn_2nd,btn_deg,btn_sin,btn_cos,btn_tan,btn_pow,btn_lg,btn_ln,btn_open,btn_close,btn_sqrt,btn_ac,btn_del,btn_percent,btn_divide,btn_fact,btn_7,btn_8,btn_9,btn_multiply,btn_inv,btn_4,btn_5,btn_6,btn_minus,btn_pi,btn_1,btn_2,btn_3,btn_plus,btn_expand,btn_e,btn_0,btn_comma,btn_equals"
-        app:flow_horizontalGap="@dimen/calc_btn_margin_horizontal"
-        app:flow_maxElementsWrap="4"
-        app:flow_verticalGap="@dimen/calc_btn_margin_vertical"
+        android:layout_marginTop="8dp"
+        app:constraint_referenced_ids="btn_2nd,btn_deg,btn_sin,btn_ac,btn_del,btn_percent,btn_divide,btn_inv,btn_lg,btn_cos,btn_7,btn_8,btn_9,btn_multiply,btn_pow,btn_ln,btn_tan,btn_4,btn_5,btn_6,btn_minus,btn_sqrt,btn_open,btn_close,btn_1,btn_2,btn_3,btn_plus,btn_fact,btn_pi,btn_e,btn_expand,btn_0,btn_comma,btn_equals"
+        app:flow_horizontalGap="4dp"
+        app:flow_maxElementsWrap="7"
+        app:flow_verticalGap="4dp"
         app:flow_wrapMode="aligned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintStart_toEndOf="@id/guideline_start" />
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_scientific"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="
             btn_2nd, btn_deg, btn_sin, btn_cos, btn_tan,
             btn_pow, btn_lg, btn_ln, btn_open, btn_close,
@@ -148,6 +150,7 @@
         android:id="@+id/btn_pow"
         style="@style/CalcButton.Icon"
         app:icon="@drawable/ic_exponent"
+        android:contentDescription="@string/raise_power"
         app:iconTint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
@@ -174,6 +177,7 @@
         android:id="@+id/btn_sqrt"
         style="@style/CalcButton.Icon"
         app:icon="@drawable/ic_square_root_of_x"
+        android:contentDescription="@string/scientific_button_extraction_root"
         app:iconTint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
@@ -286,9 +290,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_0"
         style="@style/CalcButton.Number"
-        android:text="@string/calculator_button_zero"
         android:contentDescription="@string/calculator_description_btn_zero"
-        />
+        android:text="@string/calculator_button_zero" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_comma"
