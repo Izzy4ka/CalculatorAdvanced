@@ -106,7 +106,7 @@
         app:flow_wrapMode="aligned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintDimensionRatio="4:5"
         app:layout_constraintStart_toEndOf="@id/guideline_start" />
 
     <androidx.constraintlayout.widget.Group
