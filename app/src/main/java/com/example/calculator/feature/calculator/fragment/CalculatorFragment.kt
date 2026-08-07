@@ -1,4 +1,4 @@
-package com.example.calculator.ui.fragment
+package com.example.calculator.feature.calculator.fragment
 
 import android.os.Bundle
 import android.transition.ChangeBounds
@@ -19,8 +19,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentCalculatorBinding
-import com.example.calculator.ui.adapter.CalculateAdapter
-import com.example.calculator.ui.viewmodel.CalculatorViewModel
+import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
+import com.example.calculator.feature.calculator.adapter.CalculateAdapter
 import kotlinx.coroutines.launch
 
 class CalculatorFragment : Fragment() {

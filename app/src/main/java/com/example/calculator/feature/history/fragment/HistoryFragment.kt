@@ -1,4 +1,4 @@
-package com.example.calculator.ui.fragment
+package com.example.calculator.feature.history.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.calculator.R
 
-class ConverterFragment : Fragment() {
+class HistoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -16,8 +16,5 @@ class ConverterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_converter, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_history, container, false)
 }

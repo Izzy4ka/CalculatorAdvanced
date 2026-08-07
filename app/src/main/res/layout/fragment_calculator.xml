@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/calc_background"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragment.CalculatorFragment">
+    tools:context=".feature.calculator.fragment.CalculatorFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start"
