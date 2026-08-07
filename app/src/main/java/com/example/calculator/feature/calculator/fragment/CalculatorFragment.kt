@@ -66,16 +66,12 @@ class CalculatorFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.isKeyboardExpanded.collect { isExpanded ->
-                    updateKeyboardState(isExpanded)
-                }
+                viewModel.isKeyboardExpanded.collect(::updateKeyboardState)
             }
         }
     }
 
     private fun setupListeners() {
-        setupToolbarListeners()
-        setupTabListeners()
         setupKeyboardListeners()
 
         if (!isExpandableMode) {
@@ -83,10 +79,6 @@ class CalculatorFragment : Fragment() {
         }
 
         setupExpandableListeners()
-    }
-
-    private fun setupTabListeners() {
-
     }
 
     private fun setupExpandableListeners() {
@@ -99,18 +91,6 @@ class CalculatorFragment : Fragment() {
         with(binding) {
             btn0.setOnClickListener {
 
-            }
-        }
-    }
-
-    private fun setupToolbarListeners() {
-        binding.toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_history -> {
-                    true
-                }
-
-                else -> false
             }
         }
     }

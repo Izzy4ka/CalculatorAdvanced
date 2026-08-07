@@ -19,12 +19,11 @@ class CalculateAdapter : RecyclerView.Adapter<CalculateAdapter.CalculateViewHold
         holder: CalculateViewHolder,
         position: Int,
     ) {
-        holder.binding.itemTxt.text = "Hello"
     }
 
     override fun getItemCount(): Int = 3
 
     class CalculateViewHolder(
-        val binding: ItemCalculateBinding,
+        binding: ItemCalculateBinding,
     ) : RecyclerView.ViewHolder(binding.root)
 }

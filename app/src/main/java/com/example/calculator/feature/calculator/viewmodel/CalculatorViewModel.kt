@@ -1,16 +1,21 @@
 package com.example.calculator.feature.calculator.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-class CalculatorViewModel : ViewModel() {
-    private val _isKeyboardExpanded = MutableStateFlow(false)
+class CalculatorViewModel(
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    val isKeyboardExpanded: StateFlow<Boolean> = _isKeyboardExpanded.asStateFlow()
+    val isKeyboardExpanded: StateFlow<Boolean> =
+        savedStateHandle.getStateFlow(KEY_IS_EXPANDED, false)
 
     fun toggleKeyboardExpansion() {
-        _isKeyboardExpanded.value = !_isKeyboardExpanded.value
+        savedStateHandle[KEY_IS_EXPANDED] = !isKeyboardExpanded.value
+    }
+
+    companion object {
+        private const val KEY_IS_EXPANDED = "is_keyboard_expanded"
     }
 }
