@@ -3,6 +3,7 @@ package com.example.calculator.ui.fragment
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.Fade
+import android.transition.Transition
 import android.transition.TransitionManager
 import android.transition.TransitionSet
 import android.view.LayoutInflater
@@ -10,22 +11,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.calculator.R
 import com.example.calculator.databinding.FragmentCalculatorBinding
 import com.example.calculator.ui.adapter.CalculateAdapter
+import com.example.calculator.ui.viewmodel.CalculatorViewModel
+import kotlinx.coroutines.launch
 
 class CalculatorFragment : Fragment() {
-    private lateinit var binding: FragmentCalculatorBinding
+
+    private var _binding: FragmentCalculatorBinding? = null
+    private val binding get() = requireNotNull(_binding) { "Binding is null" }
+
     private val adapter by lazy { CalculateAdapter() }
+    private val viewModel by viewModels<CalculatorViewModel>()
+
+    private val isExpandableMode by lazy {
+        resources.getBoolean(R.bool.is_keyboard_expandable)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentCalculatorBinding.inflate(inflater, container, false)
+        _binding = FragmentCalculatorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,43 +51,116 @@ class CalculatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupInitialUi()
         setupListeners()
+        observeViewModel()
     }
 
-    private fun setupListeners() {
-        binding.btnExpand.setOnClickListener {
-            toggleScientificKeyboard()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun observeViewModel() {
+        if (!isExpandableMode) {
+            return
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isKeyboardExpanded.collect { isExpanded ->
+                    updateKeyboardState(isExpanded)
+                }
+            }
         }
     }
 
-    private fun toggleScientificKeyboard() {
-        val isCurrentlyHidden = binding.groupScientific.isGone
+    private fun setupListeners() {
+        setupToolbarListeners()
+        setupTabListeners()
+        setupKeyboardListeners()
 
-        val transition =
-            TransitionSet().apply {
-                addTransition(ChangeBounds())
-                addTransition(Fade())
-                duration = ANIMATION_DURATION_MS
-                interpolator = AccelerateDecelerateInterpolator()
+        if (!isExpandableMode) {
+            return
+        }
+
+        setupExpandableListeners()
+    }
+
+    private fun setupTabListeners() {
+
+    }
+
+    private fun setupExpandableListeners() {
+        binding.btnExpand.setOnClickListener {
+            viewModel.toggleKeyboardExpansion()
+        }
+    }
+
+    private fun setupKeyboardListeners() {
+        with(binding) {
+            btn0.setOnClickListener {
+
             }
+        }
+    }
 
-        TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transition)
+    private fun setupToolbarListeners() {
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_history -> {
+                    true
+                }
 
-        binding.groupScientific.isVisible = isCurrentlyHidden
-        binding.keyboardFlow.setMaxElementsWrap(
-            if (isCurrentlyHidden) {
-                EXPANDED_FLOW_WRAP_COUNT
-            } else {
-                COLLAPSED_FLOW_WRAP_COUNT
-            },
-        )
-        (binding.keyboardFlow.layoutParams as ConstraintLayout.LayoutParams).apply {
-            matchConstraintPercentHeight =
-                if (isCurrentlyHidden) EXPANDED_FLOW_HEIGHT_PERCENT else COLLAPSED_FLOW_HEIGHT_PERCENT
+                else -> false
+            }
         }
     }
 
     private fun setupInitialUi() {
         binding.rvHistory.adapter = adapter
+    }
+
+    private fun updateKeyboardState(isExpanded: Boolean) {
+        if (binding.groupScientific.isVisible == isExpanded) return
+
+        prepareKeyboardTransition()
+
+        applyKeyboardConfiguration(isExpanded)
+    }
+
+    private fun prepareKeyboardTransition() {
+        val transition = TransitionSet().apply {
+            addTransition(ChangeBounds().apply {
+                resizeClip = true
+            })
+            addTransition(Fade())
+            duration = ANIMATION_DURATION_MS
+            interpolator = AccelerateDecelerateInterpolator()
+            addListener(object : Transition.TransitionListener {
+                override fun onTransitionCancel(transition: Transition?) = Unit
+                override fun onTransitionPause(transition: Transition?) = Unit
+                override fun onTransitionResume(transition: Transition?) = Unit
+                override fun onTransitionStart(transition: Transition?) = Unit
+
+                override fun onTransitionEnd(transition: Transition?) {
+                    binding.keyboardFlow.requestLayout()
+                }
+            })
+        }
+        TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transition)
+    }
+
+    private fun applyKeyboardConfiguration(isExpanded: Boolean) {
+        binding.groupScientific.isVisible = isExpanded
+
+        binding.keyboardFlow.apply {
+            setMaxElementsWrap(
+                if (isExpanded) EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT
+            )
+
+            (layoutParams as ConstraintLayout.LayoutParams).apply {
+                dimensionRatio = if (isExpanded) EXPANDED_RATIO else COLLAPSED_RATIO
+            }
+        }
     }
 
     private companion object {
@@ -81,7 +169,7 @@ class CalculatorFragment : Fragment() {
         const val COLLAPSED_FLOW_WRAP_COUNT = 4
         const val EXPANDED_FLOW_WRAP_COUNT = 5
 
-        const val COLLAPSED_FLOW_HEIGHT_PERCENT = 0.55f
-        const val EXPANDED_FLOW_HEIGHT_PERCENT = 0.65f
+        const val COLLAPSED_RATIO = "4:5"
+        const val EXPANDED_RATIO = "5:7"
     }
 }

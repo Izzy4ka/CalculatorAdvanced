@@ -22,42 +22,56 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <TextView
-        android:id="@+id/tv_calculator"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="@dimen/default_text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_more"
-        app:layout_constraintEnd_toStartOf="@+id/tv_converter"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        android:background="@android:color/transparent"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_more" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_converter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/navigation_converter"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/default_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_calculator"
-        app:layout_constraintEnd_toStartOf="@id/btn_more"
-        app:layout_constraintStart_toEndOf="@+id/tv_calculator"
-        app:layout_constraintTop_toTopOf="@+id/tv_calculator" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/menu_calculator">
 
-    <ImageView
-        android:id="@+id/btn_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/calc_btn_margin_vertical"
-        android:contentDescription="@string/calculator_history_button"
-        android:src="@drawable/ic_more_vert"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_calculator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_converter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/navigation_converter"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/default_text_size" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
@@ -67,7 +81,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_result"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/btn_more"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
         app:stackFromEnd="true"
         tools:itemCount="3"
         tools:listitem="@layout/item_calculate" />
@@ -77,7 +91,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tv_calculator,tv_converter,btn_more,rv_history" />
+        app:constraint_referenced_ids="app_bar,rv_history" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -149,8 +163,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_pow"
         style="@style/CalcButton.Icon"
-        app:icon="@drawable/ic_exponent"
         android:contentDescription="@string/raise_power"
+        app:icon="@drawable/ic_exponent"
         app:iconTint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
@@ -176,8 +190,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sqrt"
         style="@style/CalcButton.Icon"
-        app:icon="@drawable/ic_square_root_of_x"
         android:contentDescription="@string/scientific_button_extraction_root"
+        app:icon="@drawable/ic_square_root_of_x"
         app:iconTint="@color/white" />
 
     <com.google.android.material.button.MaterialButton
