@@ -49,6 +49,7 @@
     <string name="calculator_button_delete">Удалить</string>
     <string name="calculator_button_expand">Открыть дополнительные функции</string>
     <string name="calculator_history_button">Открыть историю</string>
+    <string name="calculator_history">История</string>
     <string name="scientific_button_power">Степень</string>
     <string name="scientific_button_extraction_root">Квадратный корень</string>
 
