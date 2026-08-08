@@ -1,11 +1,10 @@
 package com.example.calculator.feature.calculator.fragment
 
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.Fade
-import android.transition.Transition
-import android.transition.TransitionManager
-import android.transition.TransitionSet
+import android.util.TypedValue
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +17,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.calculator.R
+import com.example.calculator.core.utils.TextSafeTransition
 import com.example.calculator.databinding.FragmentCalculatorBinding
 import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
 import com.example.calculator.feature.calculator.adapter.CalculateAdapter
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 class CalculatorFragment : Fragment() {
@@ -34,6 +35,9 @@ class CalculatorFragment : Fragment() {
     private val isExpandableMode by lazy {
         resources.getBoolean(R.bool.is_keyboard_expandable)
     }
+
+    private val defaultTextSizes = mutableMapOf<Int, Float>()
+    private val defaultIconSizes = mutableMapOf<Int, Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +53,7 @@ class CalculatorFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        setupInitialUi()
+        setupHistory()
         setupListeners()
         observeViewModel()
     }
@@ -95,7 +99,7 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    private fun setupInitialUi() {
+    private fun setupHistory() {
         binding.rvHistory.adapter = adapter
     }
 
@@ -109,24 +113,15 @@ class CalculatorFragment : Fragment() {
 
     private fun prepareKeyboardTransition() {
         val transition = TransitionSet().apply {
-            addTransition(ChangeBounds().apply {
-                resizeClip = true
-            })
+
+            addTransition(TextSafeTransition())
+
             addTransition(Fade())
+
             duration = ANIMATION_DURATION_MS
             interpolator = AccelerateDecelerateInterpolator()
-            addListener(object : Transition.TransitionListener {
-                override fun onTransitionCancel(transition: Transition?) = Unit
-                override fun onTransitionPause(transition: Transition?) = Unit
-                override fun onTransitionResume(transition: Transition?) = Unit
-                override fun onTransitionStart(transition: Transition?) = Unit
-
-                override fun onTransitionEnd(transition: Transition?) {
-                    binding.keyboardFlow.requestLayout()
-                }
-            })
         }
-        TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transition)
+        TransitionManager.beginDelayedTransition(binding.root, transition)
     }
 
     private fun applyKeyboardConfiguration(isExpanded: Boolean) {
@@ -141,10 +136,45 @@ class CalculatorFragment : Fragment() {
                 dimensionRatio = if (isExpanded) EXPANDED_RATIO else COLLAPSED_RATIO
             }
         }
+
+        updateButtonContentSizes(isExpanded)
+    }
+
+    private fun updateButtonContentSizes(isExpanded: Boolean) {
+        binding.keyboardFlow.referencedIds.forEach { id ->
+            val button = binding.root.findViewById<MaterialButton>(id)
+                ?: return@forEach
+
+            val originalTextSize = defaultTextSizes.getOrPut(id) {
+                button.textSize
+            }
+
+            button.setTextSize(
+                TypedValue.COMPLEX_UNIT_PX,
+                if (isExpanded) {
+                    originalTextSize * CONTENT_SCALE_RATIO
+                } else {
+                    originalTextSize
+                },
+            )
+
+            button.icon?.let {
+                val originalIconSize = defaultIconSizes.getOrPut(id) {
+                    button.iconSize
+                }
+
+                button.iconSize = if (isExpanded) {
+                    (originalIconSize * CONTENT_SCALE_RATIO).toInt()
+                } else {
+                    originalIconSize
+                }
+            }
+        }
     }
 
     private companion object {
         const val ANIMATION_DURATION_MS: Long = 300
+        const val CONTENT_SCALE_RATIO = 0.8f
 
         const val COLLAPSED_FLOW_WRAP_COUNT = 4
         const val EXPANDED_FLOW_WRAP_COUNT = 5
