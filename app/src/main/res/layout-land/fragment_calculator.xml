@@ -24,7 +24,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/calc_btn_margin_vertical"
         app:layout_constraintBottom_toTopOf="@+id/tv_result"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
@@ -33,13 +33,6 @@
         app:stackFromEnd="true"
         tools:itemCount="3"
         tools:listitem="@layout/item_calculate" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="app_bar,rv_history" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -55,7 +48,7 @@
         app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/barrier_top"
+        app:layout_constraintTop_toBottomOf="@id/rv_history"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.helper.widget.Flow

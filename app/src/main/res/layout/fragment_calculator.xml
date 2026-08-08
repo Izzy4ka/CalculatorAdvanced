@@ -34,13 +34,6 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_calculate" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="app_bar,rv_history" />
-
     <TextView
         android:id="@+id/tv_result"
         android:layout_width="0dp"
@@ -55,7 +48,7 @@
         app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/barrier_top" />
+        app:layout_constraintTop_toBottomOf="@id/rv_history" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/keyboard_flow"
@@ -67,7 +60,7 @@
         app:flow_verticalGap="@dimen/calc_btn_margin_vertical"
         app:flow_wrapMode="aligned"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="H,4:5"
+        app:layout_constraintDimensionRatio="4:5"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start" />
 
