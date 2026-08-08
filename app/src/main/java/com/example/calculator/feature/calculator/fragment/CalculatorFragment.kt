@@ -25,6 +25,7 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 class CalculatorFragment : Fragment() {
+    @Suppress("ktlint:standard:backing-property-naming", "PropertyName")
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 
