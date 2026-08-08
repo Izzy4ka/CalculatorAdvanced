@@ -30,6 +30,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">none</item>
 
+        <item name="rippleColor">@android:color/transparent</item>
         <item name="android:stateListAnimator">@animator/btn_scale_anim</item>
     </style>
 
