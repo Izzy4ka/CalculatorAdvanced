@@ -2,9 +2,6 @@ package com.example.calculator.feature.calculator.fragment
 
 import android.os.Bundle
 import android.util.TypedValue
-import androidx.transition.Fade
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +13,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.example.calculator.R
 import com.example.calculator.core.utils.TextSafeTransition
 import com.example.calculator.databinding.FragmentCalculatorBinding
-import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
 import com.example.calculator.feature.calculator.adapter.CalculateAdapter
+import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 class CalculatorFragment : Fragment() {
-
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 
@@ -94,7 +93,6 @@ class CalculatorFragment : Fragment() {
     private fun setupKeyboardListeners() {
         with(binding) {
             btn0.setOnClickListener {
-
             }
         }
     }
@@ -112,15 +110,15 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun prepareKeyboardTransition() {
-        val transition = TransitionSet().apply {
+        val transition =
+            TransitionSet().apply {
+                addTransition(TextSafeTransition())
 
-            addTransition(TextSafeTransition())
+                addTransition(Fade())
 
-            addTransition(Fade())
-
-            duration = ANIMATION_DURATION_MS
-            interpolator = AccelerateDecelerateInterpolator()
-        }
+                duration = ANIMATION_DURATION_MS
+                interpolator = AccelerateDecelerateInterpolator()
+            }
         TransitionManager.beginDelayedTransition(binding.root, transition)
     }
 
@@ -129,7 +127,7 @@ class CalculatorFragment : Fragment() {
 
         binding.keyboardFlow.apply {
             setMaxElementsWrap(
-                if (isExpanded) EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT
+                if (isExpanded) EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT,
             )
 
             (layoutParams as ConstraintLayout.LayoutParams).apply {
@@ -142,12 +140,14 @@ class CalculatorFragment : Fragment() {
 
     private fun updateButtonContentSizes(isExpanded: Boolean) {
         binding.keyboardFlow.referencedIds.forEach { id ->
-            val button = binding.root.findViewById<MaterialButton>(id)
-                ?: return@forEach
+            val button =
+                binding.root.findViewById<MaterialButton>(id)
+                    ?: return@forEach
 
-            val originalTextSize = defaultTextSizes.getOrPut(id) {
-                button.textSize
-            }
+            val originalTextSize =
+                defaultTextSizes.getOrPut(id) {
+                    button.textSize
+                }
 
             button.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -159,15 +159,17 @@ class CalculatorFragment : Fragment() {
             )
 
             button.icon?.let {
-                val originalIconSize = defaultIconSizes.getOrPut(id) {
-                    button.iconSize
-                }
+                val originalIconSize =
+                    defaultIconSizes.getOrPut(id) {
+                        button.iconSize
+                    }
 
-                button.iconSize = if (isExpanded) {
-                    (originalIconSize * CONTENT_SCALE_RATIO).toInt()
-                } else {
-                    originalIconSize
-                }
+                button.iconSize =
+                    if (isExpanded) {
+                        (originalIconSize * CONTENT_SCALE_RATIO).toInt()
+                    } else {
+                        originalIconSize
+                    }
             }
         }
     }

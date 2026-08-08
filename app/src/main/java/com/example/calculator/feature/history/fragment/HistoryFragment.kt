@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.example.calculator.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
-
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 

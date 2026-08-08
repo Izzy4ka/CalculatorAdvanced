@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.calculator.feature.main.model.TabMode
 import kotlinx.coroutines.flow.StateFlow
 
-class MainViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class MainViewModel(
+    private val savedStateHandle: SavedStateHandle,
+) : ViewModel() {
     val currentTab: StateFlow<TabMode> =
         savedStateHandle.getStateFlow(KEY_CURRENT_TAB, TabMode.CALCULATOR)
 

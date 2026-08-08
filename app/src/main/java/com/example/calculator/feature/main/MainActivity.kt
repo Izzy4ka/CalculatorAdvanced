@@ -47,7 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun animateTextColor(view: TextView, targetColor: Int) {
+    private fun animateTextColor(
+        view: TextView,
+        targetColor: Int,
+    ) {
         val currentColor = view.currentTextColor
 
         if (currentColor == targetColor) return

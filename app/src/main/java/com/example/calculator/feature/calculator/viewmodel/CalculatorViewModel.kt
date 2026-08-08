@@ -5,9 +5,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
 
 class CalculatorViewModel(
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
     val isKeyboardExpanded: StateFlow<Boolean> =
         savedStateHandle.getStateFlow(KEY_IS_EXPANDED, false)
 

@@ -4,10 +4,10 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Rect
-import androidx.transition.Transition
-import androidx.transition.TransitionValues
 import android.view.View
 import android.view.ViewGroup
+import androidx.transition.Transition
+import androidx.transition.TransitionValues
 
 class TextSafeTransition : Transition() {
     private fun captureValues(transitionValues: TransitionValues?) {
@@ -22,7 +22,7 @@ class TextSafeTransition : Transition() {
     override fun createAnimator(
         sceneRoot: ViewGroup,
         startValues: TransitionValues?,
-        endValues: TransitionValues?
+        endValues: TransitionValues?,
     ): Animator? {
         if (startValues == null || endValues == null) {
             return null

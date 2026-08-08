@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.calculator.databinding.FragmentConverterBinding
 
 class ConverterFragment : Fragment() {
-
     private var _binding: FragmentConverterBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
