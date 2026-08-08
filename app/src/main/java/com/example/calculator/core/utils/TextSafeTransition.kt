@@ -19,6 +19,7 @@ class TextSafeTransition : Transition() {
         transitionValues.values[PROP_BOUNDS] = Rect(view.left, view.top, view.right, view.bottom)
     }
 
+    @Suppress("ReturnCount")
     override fun createAnimator(
         sceneRoot: ViewGroup,
         startValues: TransitionValues?,

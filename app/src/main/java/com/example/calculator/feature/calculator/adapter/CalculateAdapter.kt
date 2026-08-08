@@ -18,8 +18,7 @@ class CalculateAdapter : RecyclerView.Adapter<CalculateAdapter.CalculateViewHold
     override fun onBindViewHolder(
         holder: CalculateViewHolder,
         position: Int,
-    ) {
-    }
+    ) = Unit
 
     override fun getItemCount(): Int = 3
 
