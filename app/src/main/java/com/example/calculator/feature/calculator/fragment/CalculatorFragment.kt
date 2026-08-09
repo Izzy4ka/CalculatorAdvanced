@@ -25,8 +25,8 @@ import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
+@Suppress("TooManyFunctions", "ktlint:standard:backing-property-naming")
 class CalculatorFragment : Fragment() {
-    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 
@@ -47,8 +47,8 @@ class CalculatorFragment : Fragment() {
 
     private val displayHeightPx by lazy { resources.displayMetrics.heightPixels.toFloat() }
 
-    private val hintRevealDistancePx by lazy { displayHeightPx * 0.05f }
-    private val dragThresholdPx by lazy { displayHeightPx * 0.2f }
+    private val hintRevealDistancePx by lazy { displayHeightPx * HINT_REVEAL_HEIGHT_RATIO }
+    private val dragThresholdPx by lazy { displayHeightPx * DRAG_THRESHOLD_HEIGHT_RATIO }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,7 +108,6 @@ class CalculatorFragment : Fragment() {
                     applyDragUiState(currentTranslation)
                 },
                 onDragActionFired = {
-                    // TODO: открыть историю
                 },
             )
 
@@ -250,6 +249,8 @@ class CalculatorFragment : Fragment() {
 
     private companion object {
         private const val HINT_START_OFFSET_PX = -60f
+        private const val HINT_REVEAL_HEIGHT_RATIO = 0.05f
+        private const val DRAG_THRESHOLD_HEIGHT_RATIO = 0.2f
 
         const val ANIMATION_DURATION_MS: Long = 300
         const val CONTENT_SCALE_RATIO = 0.8f

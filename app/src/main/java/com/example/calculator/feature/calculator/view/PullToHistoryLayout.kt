@@ -35,6 +35,7 @@ class PullToHistoryLayout
             this.config = configuration
         }
 
+        @Suppress("ReturnCount")
         override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
             val currentConfig = config ?: return super.onInterceptTouchEvent(ev)
 
@@ -60,6 +61,7 @@ class PullToHistoryLayout
             return super.onInterceptTouchEvent(ev)
         }
 
+        @Suppress("ReturnCount")
         override fun onTouchEvent(event: MotionEvent): Boolean {
             val currentConfig = config ?: return super.onTouchEvent(event)
 
