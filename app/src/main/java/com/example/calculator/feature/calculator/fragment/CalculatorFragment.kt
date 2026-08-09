@@ -100,16 +100,17 @@ class CalculatorFragment : Fragment() {
     private fun setupPullToHistoryLogic() {
         val historyView = binding.rvHistory ?: return
 
-        val config = PullToHistoryLayout.Config(
-            scrollTarget = historyView,
-            dragThresholdPx = dragThresholdPx,
-            onDragUpdate = { currentTranslation ->
-                applyDragUiState(currentTranslation)
-            },
-            onDragActionFired = {
-                // TODO: открыть историю
-            }
-        )
+        val config =
+            PullToHistoryLayout.Config(
+                scrollTarget = historyView,
+                dragThresholdPx = dragThresholdPx,
+                onDragUpdate = { currentTranslation ->
+                    applyDragUiState(currentTranslation)
+                },
+                onDragActionFired = {
+                    // TODO: открыть историю
+                },
+            )
 
         binding.pullToHistoryLayout?.setup(config)
     }
@@ -206,7 +207,6 @@ class CalculatorFragment : Fragment() {
 
     private fun applyDragUiState(totalTranslation: Float) {
         if (totalTranslation <= hintRevealDistancePx) {
-
             val progress = totalTranslation / hintRevealDistancePx
 
             binding.tvPullHint?.translationY = HINT_START_OFFSET_PX * (1f - progress)
@@ -230,12 +230,18 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    private fun setTvPullHint(text: String, color: Int) {
+    private fun setTvPullHint(
+        text: String,
+        color: Int,
+    ) {
         if (binding.tvPullHint?.text != text) binding.tvPullHint?.text = text
         if (binding.tvPullHint?.currentTextColor != color) binding.tvPullHint?.setTextColor(color)
     }
 
-    private fun setPullTranslation(value: Float, applyToHint: Boolean) {
+    private fun setPullTranslation(
+        value: Float,
+        applyToHint: Boolean,
+    ) {
         binding.rvHistory?.translationY = value
         binding.tvPreResult.translationY = value
         binding.tvExpression.translationY = value
