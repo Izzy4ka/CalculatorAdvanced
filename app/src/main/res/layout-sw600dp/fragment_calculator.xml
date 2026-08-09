@@ -21,33 +21,71 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_history"
+    <com.example.calculator.feature.calculator.view.PullToHistoryLayout
+        android:id="@+id/pullToHistoryLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tv_result"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/keyboard_flow"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent"
-        app:stackFromEnd="true"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_bias="1"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_calculate" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|end"
-        android:includeFontPadding="false"
-        android:text="@string/calculator_button_zero"
-        android:textColor="@color/white"
-        android:textSize="@dimen/calculator_result_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/keyboard_flow"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/rv_history" />
+        <TextView
+            android:id="@+id/tv_pull_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:alpha="0"
+            android:gravity="center"
+            android:text="@string/pull_to_history"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@+id/rv_history"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="VisualLintBounds" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/tv_expression"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_calculate" />
+
+        <TextView
+            android:id="@+id/tv_expression"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|end"
+            android:includeFontPadding="false"
+            android:text="@string/calculator_zero"
+            android:textColor="@color/white"
+            android:textSize="@dimen/calculator_expression_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/tv_pre_result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pre_result"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="bottom|end"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/calculator_result_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="= 0" />
+
+    </com.example.calculator.feature.calculator.view.PullToHistoryLayout>
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/keyboard_flow"
@@ -63,8 +101,7 @@
         app:layout_constraintDimensionRatio="W5:7"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_result"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/pullToHistoryLayout" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_scientific"
