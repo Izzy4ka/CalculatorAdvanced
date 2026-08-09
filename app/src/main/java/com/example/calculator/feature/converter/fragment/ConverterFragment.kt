@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.calculator.databinding.FragmentConverterBinding
 
 class ConverterFragment : Fragment() {
-    @Suppress("ktlint:standard:backing-property-naming", "PropertyName")
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentConverterBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 
