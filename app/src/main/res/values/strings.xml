@@ -57,4 +57,6 @@
     <string name="release_for_history">↓ Отпустите для просмотра истории.</string>
     <string name="calculator_description_btn_zero">Кнопка 0</string>
     <string name="raise_power">Возвести в степень</string>
+
+    <string name="temp">Временный элемент!!!</string>
 </resources>
