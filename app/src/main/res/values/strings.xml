@@ -59,4 +59,7 @@
     <string name="raise_power">Возвести в степень</string>
 
     <string name="temp">Временный элемент!!!</string>
+
+    <string name="calc_flow_ratio_collapsed" translatable="false">4:5</string>
+    <string name="calc_flow_ratio_expanded" translatable="false">5:7</string>
 </resources>

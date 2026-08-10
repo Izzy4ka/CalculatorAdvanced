@@ -44,6 +44,9 @@ class CalculatorFragment : Fragment() {
     private val colorHintActive by lazy { requireContext().getColor(R.color.hint_active_orange) }
     private val textPullToHistory by lazy { getString(R.string.pull_to_history) }
     private val textReleaseForHistory by lazy { getString(R.string.release_for_history) }
+    private val hintStartOffsetPx by lazy {
+        -resources.getDimension(R.dimen.hint_start_offset)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -133,7 +136,7 @@ class CalculatorFragment : Fragment() {
 
                 addTransition(Fade())
 
-                duration = ANIMATION_DURATION_MS
+                duration = resources.getInteger(R.integer.calc_animation_duration).toLong()
                 interpolator = AccelerateDecelerateInterpolator()
             }
         TransitionManager.beginDelayedTransition(binding.root, transition)
@@ -142,13 +145,24 @@ class CalculatorFragment : Fragment() {
     private fun applyKeyboardConfiguration(isExpanded: Boolean) {
         binding.groupScientific.isVisible = isExpanded
 
+        val wrapCountRes = if (isExpanded) {
+            R.integer.calc_flow_wrap_count_expanded
+        } else {
+            R.integer.calc_flow_wrap_count_collapsed
+        }
+
+        val ratioRes = if (isExpanded) {
+            R.string.calc_flow_ratio_expanded
+        } else {
+            R.string.calc_flow_ratio_collapsed
+        }
+
         binding.keyboardFlow.apply {
-            setMaxElementsWrap(
-                if (isExpanded) EXPANDED_FLOW_WRAP_COUNT else COLLAPSED_FLOW_WRAP_COUNT,
-            )
+            setMaxElementsWrap(resources.getInteger(wrapCountRes))
 
             (layoutParams as ConstraintLayout.LayoutParams).apply {
-                dimensionRatio = if (isExpanded) EXPANDED_RATIO else COLLAPSED_RATIO
+                val ratioValue = getString(ratioRes)
+                dimensionRatio = ratioValue.ifEmpty { null }
             }
         }
 
@@ -199,7 +213,7 @@ class CalculatorFragment : Fragment() {
         if (totalTranslation <= hintRevealPx) {
             val progress = totalTranslation / hintRevealPx
 
-            binding.tvPullHint?.translationY = HINT_START_OFFSET_PX * (1f - progress)
+            binding.tvPullHint?.translationY = hintStartOffsetPx * (1f - progress)
             binding.tvPullHint?.alpha = progress.coerceIn(0f, 1f)
 
             setPullTranslation(0f, applyToHint = false)
@@ -247,17 +261,8 @@ class CalculatorFragment : Fragment() {
     }
 
     private companion object {
-        private const val HINT_START_OFFSET_PX = -60f
         private const val HINT_REVEAL_HEIGHT_RATIO = 0.05f
         private const val DRAG_THRESHOLD_HEIGHT_RATIO = 0.2f
-
-        const val ANIMATION_DURATION_MS: Long = 300
         const val CONTENT_SCALE_RATIO = 0.8f
-
-        const val COLLAPSED_FLOW_WRAP_COUNT = 4
-        const val EXPANDED_FLOW_WRAP_COUNT = 5
-
-        const val COLLAPSED_RATIO = "4:5"
-        const val EXPANDED_RATIO = "5:7"
     }
 }
