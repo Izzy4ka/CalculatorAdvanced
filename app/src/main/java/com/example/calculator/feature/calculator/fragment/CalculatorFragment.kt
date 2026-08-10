@@ -145,17 +145,19 @@ class CalculatorFragment : Fragment() {
     private fun applyKeyboardConfiguration(isExpanded: Boolean) {
         binding.groupScientific.isVisible = isExpanded
 
-        val wrapCountRes = if (isExpanded) {
-            R.integer.calc_flow_wrap_count_expanded
-        } else {
-            R.integer.calc_flow_wrap_count_collapsed
-        }
+        val wrapCountRes =
+            if (isExpanded) {
+                R.integer.calc_flow_wrap_count_expanded
+            } else {
+                R.integer.calc_flow_wrap_count_collapsed
+            }
 
-        val ratioRes = if (isExpanded) {
-            R.string.calc_flow_ratio_expanded
-        } else {
-            R.string.calc_flow_ratio_collapsed
-        }
+        val ratioRes =
+            if (isExpanded) {
+                R.string.calc_flow_ratio_expanded
+            } else {
+                R.string.calc_flow_ratio_collapsed
+            }
 
         binding.keyboardFlow.apply {
             setMaxElementsWrap(resources.getInteger(wrapCountRes))
@@ -208,7 +210,7 @@ class CalculatorFragment : Fragment() {
     private fun applyDragUiState(
         totalTranslation: Float,
         hintRevealPx: Float,
-        dragThresholdPx: Float
+        dragThresholdPx: Float,
     ) {
         if (totalTranslation <= hintRevealPx) {
             val progress = totalTranslation / hintRevealPx
