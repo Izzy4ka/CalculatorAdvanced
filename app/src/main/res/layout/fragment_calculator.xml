@@ -79,11 +79,12 @@
             android:gravity="bottom|end"
             android:includeFontPadding="false"
             android:textColor="@color/gray"
+            android:visibility="gone"
             android:textSize="@dimen/calculator_result_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="= 0" />
+            />
 
     </com.example.calculator.feature.calculator.view.PullToHistoryLayout>
 

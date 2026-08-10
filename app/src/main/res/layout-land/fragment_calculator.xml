@@ -44,6 +44,7 @@
         android:layout_marginTop="4dp"
         android:gravity="bottom|end"
         android:includeFontPadding="false"
+        android:visibility="gone"
         android:textColor="@color/gray"
         android:textSize="@dimen/calculator_result_text_size"
         app:layout_constraintBottom_toTopOf="@id/keyboard_flow"
