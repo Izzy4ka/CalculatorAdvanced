@@ -45,11 +45,6 @@ class CalculatorFragment : Fragment() {
     private val textPullToHistory by lazy { getString(R.string.pull_to_history) }
     private val textReleaseForHistory by lazy { getString(R.string.release_for_history) }
 
-    private val displayHeightPx by lazy { resources.displayMetrics.heightPixels.toFloat() }
-
-    private val hintRevealDistancePx by lazy { displayHeightPx * HINT_REVEAL_HEIGHT_RATIO }
-    private val dragThresholdPx by lazy { displayHeightPx * DRAG_THRESHOLD_HEIGHT_RATIO }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,8 +60,10 @@ class CalculatorFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setupHistory()
-        setupListeners()
-        observeViewModel()
+
+        if (isExpandableMode) {
+            setupExpandableFeatures()
+        }
     }
 
     override fun onDestroyView() {
@@ -74,11 +71,13 @@ class CalculatorFragment : Fragment() {
         _binding = null
     }
 
-    private fun observeViewModel() {
-        if (!isExpandableMode) {
-            return
-        }
+    private fun setupExpandableFeatures() {
+        setupExpandableListeners()
+        setupPullToHistoryLogic()
+        observeExpandableViewModel()
+    }
 
+    private fun observeExpandableViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isKeyboardExpanded.collect(::updateKeyboardState)
@@ -86,26 +85,19 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    private fun setupListeners() {
-        setupKeyboardListeners()
-
-        if (!isExpandableMode) {
-            return
-        }
-
-        setupPullToHistoryLogic()
-        setupExpandableListeners()
-    }
-
     private fun setupPullToHistoryLogic() {
         val historyView = binding.rvHistory ?: return
+
+        val displayHeightPx = resources.displayMetrics.heightPixels.toFloat()
+        val hintRevealPx = displayHeightPx * HINT_REVEAL_HEIGHT_RATIO
+        val dragThresholdPx = displayHeightPx * DRAG_THRESHOLD_HEIGHT_RATIO
 
         val config =
             PullToHistoryLayout.Config(
                 scrollTarget = historyView,
                 dragThresholdPx = dragThresholdPx,
                 onDragUpdate = { currentTranslation ->
-                    applyDragUiState(currentTranslation)
+                    applyDragUiState(currentTranslation, hintRevealPx, dragThresholdPx)
                 },
                 onDragActionFired = {
                 },
@@ -120,19 +112,14 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    private fun setupKeyboardListeners() {
-        with(binding) {
-            btn0.setOnClickListener {
-            }
-        }
-    }
-
     private fun setupHistory() {
         binding.rvHistory?.adapter = adapter
     }
 
     private fun updateKeyboardState(isExpanded: Boolean) {
-        if (binding.groupScientific.isVisible == isExpanded) return
+        if (binding.groupScientific.isVisible == isExpanded) {
+            return
+        }
 
         prepareKeyboardTransition()
 
@@ -204,9 +191,13 @@ class CalculatorFragment : Fragment() {
         }
     }
 
-    private fun applyDragUiState(totalTranslation: Float) {
-        if (totalTranslation <= hintRevealDistancePx) {
-            val progress = totalTranslation / hintRevealDistancePx
+    private fun applyDragUiState(
+        totalTranslation: Float,
+        hintRevealPx: Float,
+        dragThresholdPx: Float
+    ) {
+        if (totalTranslation <= hintRevealPx) {
+            val progress = totalTranslation / hintRevealPx
 
             binding.tvPullHint?.translationY = HINT_START_OFFSET_PX * (1f - progress)
             binding.tvPullHint?.alpha = progress.coerceIn(0f, 1f)
@@ -216,7 +207,7 @@ class CalculatorFragment : Fragment() {
             return
         }
 
-        val extraScroll = totalTranslation - hintRevealDistancePx
+        val extraScroll = totalTranslation - hintRevealPx
         val isThresholdReached = totalTranslation > dragThresholdPx
 
         binding.tvPullHint?.alpha = 1f
@@ -233,8 +224,13 @@ class CalculatorFragment : Fragment() {
         text: String,
         color: Int,
     ) {
-        if (binding.tvPullHint?.text != text) binding.tvPullHint?.text = text
-        if (binding.tvPullHint?.currentTextColor != color) binding.tvPullHint?.setTextColor(color)
+        if (binding.tvPullHint?.text != text) {
+            binding.tvPullHint?.text = text
+        }
+
+        if (binding.tvPullHint?.currentTextColor != color) {
+            binding.tvPullHint?.setTextColor(color)
+        }
     }
 
     private fun setPullTranslation(
@@ -244,7 +240,10 @@ class CalculatorFragment : Fragment() {
         binding.rvHistory?.translationY = value
         binding.tvPreResult.translationY = value
         binding.tvExpression.translationY = value
-        if (applyToHint) binding.tvPullHint?.translationY = value
+
+        if (applyToHint) {
+            binding.tvPullHint?.translationY = value
+        }
     }
 
     private companion object {
