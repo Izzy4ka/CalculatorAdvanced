@@ -1,8 +1,9 @@
-package com.example.calculator.ui.adapter
+package com.example.calculator.feature.calculator.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calculator.R
 import com.example.calculator.databinding.ItemCalculateBinding
 
 class CalculateAdapter : RecyclerView.Adapter<CalculateAdapter.CalculateViewHolder>() {
@@ -19,7 +20,7 @@ class CalculateAdapter : RecyclerView.Adapter<CalculateAdapter.CalculateViewHold
         holder: CalculateViewHolder,
         position: Int,
     ) {
-        holder.binding.itemTxt.text = "Hello"
+        holder.binding.itemTxt.text = holder.itemView.context.getString(R.string.temp)
     }
 
     override fun getItemCount(): Int = 3

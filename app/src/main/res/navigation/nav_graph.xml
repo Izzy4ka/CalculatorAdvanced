@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.calculator.ui.fragment.CalculatorFragment"
+        android:name="com.example.calculator.feature.calculator.fragment.CalculatorFragment"
         android:label="fragment_calculator"
         tools:layout="@layout/fragment_calculator" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.calculator.ui.fragment.HistoryFragment"
+        android:name="com.example.calculator.feature.history.fragment.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/converterFragment"
-        android:name="com.example.calculator.ui.fragment.ConverterFragment"
+        android:name="com.example.calculator.feature.converter.fragment.ConverterFragment"
         android:label="fragment_converter"
         tools:layout="@layout/fragment_converter" />
 </navigation>

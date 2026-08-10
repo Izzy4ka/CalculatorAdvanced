@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#A0A0A0</color>
+    <color name="dark_gray">#222222</color>
     <color name="calc_background">#000000</color>
     <color name="calc_btn_dark_gray">#333333</color>
     <color name="calc_btn_orange">#FF9800</color>
@@ -9,4 +11,5 @@
     <color name="calc_btn_white_gray">#C5C0C0</color>
     <color name="hint_gray">#AAAAAA</color>
     <color name="hint_active_orange">#FF8C00</color>
+    <color name="golden_orange">#E68900</color>
 </resources>

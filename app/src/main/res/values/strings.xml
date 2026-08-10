@@ -1,40 +1,65 @@
 <resources>
-    <string name="app_name">Calculator</string>
-    <string name="calc_btn_zero">0</string>
-    <string name="calc_btn_one">1</string>
-    <string name="calc_btn_two">2</string>
-    <string name="calc_btn_three">3</string>
-    <string name="calc_btn_four">4</string>
-    <string name="calc_btn_five">5</string>
-    <string name="calc_btn_six">6</string>
-    <string name="calc_btn_seven">7</string>
-    <string name="calc_btn_eight">8</string>
-    <string name="calc_btn_nine">9</string>
-    <string name="calc_btn_dot">.</string>
-    <string name="calc_btn_equals">=</string>
-    <string name="calc_btn_plus">+</string>
-    <string name="calc_btn_minus">—</string>
-    <string name="calc_btn_division">/</string>
-    <string name="calc_btn_percent">%</string>
-    <string name="calc_btn_multiply">X</string>
-    <string name="calc_btn_ac">AC</string>
-    <string name="calc_btn_plus_minus">+/-</string>
-    <string name="calc_btn_special_second">2nd</string>
-    <string name="calc_btn_special_deg">deg</string>
-    <string name="calc_btn_special_sin">sin</string>
-    <string name="calc_btn_special_cos">cos</string>
-    <string name="calc_btn_special_tan">tan</string>
-    <string name="calc_btn_special_lg">lg</string>
-    <string name="calc_btn_special_ln">ln</string>
-    <string name="calc_btn_special_open_parenthesis">(</string>
-    <string name="calc_btn_special_close_parenthesis">)</string>
-    <string name="calc_btn_special_factorial">x!</string>
-    <string name="calc_btn_special_exponent_negative_one">1/x</string>
-    <string name="calc_btn_special_pi">π</string>
-    <string name="calc_btn_special_exponent_e">e</string>
-    <string name="calculator_toolbar">Калькулятор</string>
-    <string name="menu_history">Меню</string>
-    <string name="converter">Конвертер</string>
+    <string name="app_name">Калькулятор</string>
+    <string name="calculator_button_zero">0</string>
+    <string name="calculator_button_one">1</string>
+    <string name="calculator_button_two">2</string>
+    <string name="calculator_button_three">3</string>
+    <string name="calculator_button_four">4</string>
+    <string name="calculator_button_five">5</string>
+    <string name="calculator_button_six">6</string>
+    <string name="calculator_button_seven">7</string>
+    <string name="calculator_button_eight">8</string>
+    <string name="calculator_button_nine">9</string>
+
+    <string name="calculator_button_decimal">.</string>
+    <string name="calculator_button_equals">=</string>
+
+    <string name="calculator_button_add">+</string>
+    <string name="calculator_button_subtract">−</string>
+    <string name="calculator_button_divide">÷</string>
+    <string name="calculator_button_multiply">×</string>
+
+    <string name="calculator_button_percent">%</string>
+    <string name="calculator_button_clear">AC</string>
+
+    <string name="scientific_button_second_function">2nd</string>
+    <string name="scientific_button_degree">deg</string>
+
+    <string name="scientific_button_sine">sin</string>
+    <string name="scientific_button_cosine">cos</string>
+    <string name="scientific_button_tangent">tan</string>
+
+    <string name="scientific_button_logarithm">lg</string>
+    <string name="scientific_button_natural_logarithm">ln</string>
+
+    <string name="scientific_button_open_parenthesis">(</string>
+    <string name="scientific_button_close_parenthesis">)</string>
+
+    <string name="scientific_button_factorial">x!</string>
+    <string name="scientific_button_reciprocal">1/x</string>
+
+    <string name="scientific_button_pi">π</string>
+    <string name="scientific_button_euler_number">e</string>
+
+    <string name="calculator_zero">0</string>
+
+    <string name="navigation_history">История</string>
+    <string name="navigation_converter">Конвертер</string>
+
+    <string name="calculator_button_delete">Удалить</string>
+    <string name="calculator_button_expand">Открыть дополнительные функции</string>
+    <string name="calculator_history_button">Открыть историю</string>
+    <string name="calculator_history">История</string>
+    <string name="scientific_button_power">Степень</string>
+    <string name="scientific_button_extraction_root">Квадратный корень</string>
+
     <string name="pull_to_history">↓ Потяните вниз для просмотра истории.</string>
     <string name="release_for_history">↓ Отпустите для просмотра истории.</string>
+    <string name="calculator_description_btn_zero">Кнопка 0</string>
+    <string name="raise_power">Возвести в степень</string>
+
+    <string name="temp">Временный элемент!!!</string>
+
+    <string name="calc_flow_ratio_collapsed" translatable="false">4:5</string>
+    <string name="calc_flow_ratio_expanded" translatable="false">5:7</string>
 </resources>

@@ -12,14 +12,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <com.example.calculator.feature.calculator.view.PullToHistoryLayout
         android:id="@+id/pullToHistoryLayout"
@@ -78,12 +78,12 @@
             android:gravity="bottom|end"
             android:includeFontPadding="false"
             android:textColor="@color/gray"
-            android:visibility="gone"
             android:textSize="@dimen/calculator_result_text_size"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            tools:text="= 0" />
 
     </com.example.calculator.feature.calculator.view.PullToHistoryLayout>
 
@@ -97,10 +97,11 @@
         app:flow_maxElementsWrap="@integer/calc_flow_wrap_count_collapsed"
         app:flow_verticalGap="@dimen/calc_btn_margin_vertical"
         app:flow_wrapMode="aligned"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="@string/calc_flow_ratio_collapsed"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start" />
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_scientific"
@@ -140,6 +141,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_pow"
         style="@style/CalcButton.Icon"
+        android:contentDescription="@string/scientific_button_power"
         app:icon="@drawable/ic_exponent"
         app:iconTint="@color/white" />
 
@@ -166,6 +168,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sqrt"
         style="@style/CalcButton.Icon"
+        android:contentDescription="@string/scientific_button_extraction_root"
         app:icon="@drawable/ic_square_root_of_x"
         app:iconTint="@color/white" />
 

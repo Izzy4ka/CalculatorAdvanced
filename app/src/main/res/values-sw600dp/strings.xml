@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calc_flow_ratio_collapsed" translatable="false">2:1</string>
+    <string name="calc_flow_ratio_expanded" translatable="false">3:2</string>
+</resources>

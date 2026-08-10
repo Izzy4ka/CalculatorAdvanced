@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="calc_flow_wrap_count_collapsed">4</integer>
+    <integer name="calc_flow_wrap_count_expanded">5</integer>
+    <integer name="calc_flow_wrap_count_landscape">7</integer>
+
+    <integer name="calc_animation_duration">300</integer>
+</resources>

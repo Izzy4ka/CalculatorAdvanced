@@ -21,92 +21,59 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <com.example.calculator.feature.calculator.view.PullToHistoryLayout
-        android:id="@+id/pullToHistoryLayout"
+    <TextView
+        android:id="@+id/tv_expression"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|end"
+        android:includeFontPadding="false"
+        android:text="@string/calculator_zero"
+        android:textColor="@color/white"
+        android:textSize="@dimen/calculator_expression_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tv_pre_result"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_pre_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:gravity="bottom|end"
+        android:includeFontPadding="false"
+        android:visibility="gone"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/calculator_result_text_size"
         app:layout_constraintBottom_toTopOf="@id/keyboard_flow"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tv_pull_hint"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:alpha="0"
-            android:gravity="center"
-            android:text="@string/pull_to_history"
-            android:textColor="@color/gray"
-            app:layout_constraintBottom_toTopOf="@+id/rv_history"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="VisualLintBounds" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_history"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/tv_expression"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_calculate" />
-
-        <TextView
-            android:id="@+id/tv_expression"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|end"
-            android:includeFontPadding="false"
-            android:text="@string/calculator_zero"
-            android:textColor="@color/white"
-            android:textSize="@dimen/calculator_expression_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/tv_pre_result"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_pre_result"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:gravity="bottom|end"
-            android:includeFontPadding="false"
-            android:textColor="@color/gray"
-            android:visibility="gone"
-            android:textSize="@dimen/calculator_result_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-    </com.example.calculator.feature.calculator.view.PullToHistoryLayout>
+        app:layout_constraintTop_toBottomOf="@id/tv_expression"
+        tools:text="= 0" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/keyboard_flow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/black"
-        app:constraint_referenced_ids="btn_2nd,btn_deg,btn_sin,btn_cos,btn_tan,btn_pow,btn_lg,btn_ln,btn_open,btn_close,btn_sqrt,btn_ac,btn_del,btn_percent,btn_divide,btn_fact,btn_7,btn_8,btn_9,btn_multiply,btn_inv,btn_4,btn_5,btn_6,btn_minus,btn_pi,btn_1,btn_2,btn_3,btn_plus,btn_expand,btn_e,btn_0,btn_comma,btn_equals"
-        app:flow_horizontalGap="@dimen/calc_btn_margin_horizontal"
-        app:flow_maxElementsWrap="@integer/calc_flow_wrap_count_collapsed"
-        app:flow_verticalGap="@dimen/calc_btn_margin_vertical"
+        android:layout_marginTop="@dimen/spacing_default"
+        app:constraint_referenced_ids="btn_2nd,btn_deg,btn_sin,btn_ac,btn_del,btn_percent,btn_divide,btn_inv,btn_lg,btn_cos,btn_7,btn_8,btn_9,btn_multiply,btn_pow,btn_ln,btn_tan,btn_4,btn_5,btn_6,btn_minus,btn_sqrt,btn_open,btn_close,btn_1,btn_2,btn_3,btn_plus,btn_fact,btn_pi,btn_e,btn_expand,btn_0,btn_comma,btn_equals"
+        app:flow_horizontalGap="@dimen/spacing_small"
+        app:flow_maxElementsWrap="@integer/calc_flow_wrap_count_landscape"
+        app:flow_verticalGap="@dimen/spacing_small"
         app:flow_wrapMode="aligned"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="@string/calc_flow_ratio_collapsed"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_start" />
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pre_result"
+        app:layout_constraintVertical_weight="1" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_scientific"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="
             btn_2nd, btn_deg, btn_sin, btn_cos, btn_tan,
             btn_pow, btn_lg, btn_ln, btn_open, btn_close,
@@ -140,6 +107,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_pow"
         style="@style/CalcButton.Icon"
+        android:contentDescription="@string/raise_power"
         app:icon="@drawable/ic_exponent"
         app:iconTint="@color/white" />
 
@@ -166,6 +134,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_sqrt"
         style="@style/CalcButton.Icon"
+        android:contentDescription="@string/scientific_button_extraction_root"
         app:icon="@drawable/ic_square_root_of_x"
         app:iconTint="@color/white" />
 
