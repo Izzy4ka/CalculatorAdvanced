@@ -1,6 +1,8 @@
 package com.example.calculator.feature.calculator.fragment
 
 import android.os.Bundle
+import android.util.SparseArray
+import android.util.SparseIntArray
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -37,8 +39,8 @@ class CalculatorFragment : Fragment() {
         resources.getBoolean(R.bool.is_keyboard_expandable)
     }
 
-    private val defaultTextSizes = mutableMapOf<Int, Float>()
-    private val defaultIconSizes = mutableMapOf<Int, Int>()
+    private val defaultTextSizes = SparseArray<Float>()
+    private val defaultIconSizes = SparseIntArray()
 
     private val colorHintGray by lazy { requireContext().getColor(R.color.hint_gray) }
     private val colorHintActive by lazy { requireContext().getColor(R.color.hint_active_orange) }
@@ -178,8 +180,8 @@ class CalculatorFragment : Fragment() {
                     ?: return@forEach
 
             val originalTextSize =
-                defaultTextSizes.getOrPut(id) {
-                    button.textSize
+                defaultTextSizes[id] ?: button.textSize.also {
+                    defaultTextSizes.put(id, it)
                 }
 
             button.setTextSize(
@@ -193,8 +195,12 @@ class CalculatorFragment : Fragment() {
 
             button.icon?.let {
                 val originalIconSize =
-                    defaultIconSizes.getOrPut(id) {
-                        button.iconSize
+                    if (defaultIconSizes.indexOfKey(id) >= 0) {
+                        defaultIconSizes[id]
+                    } else {
+                        button.iconSize.also {
+                            defaultIconSizes.put(id, it)
+                        }
                     }
 
                 button.iconSize =
