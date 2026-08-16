@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -18,4 +19,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Calculator"
 include(":app")
- 
+include(":domain")
+include(":data")
