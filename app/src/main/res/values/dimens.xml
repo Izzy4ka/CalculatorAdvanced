@@ -3,6 +3,7 @@
     <!-- Базовые отступы -->
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="spacing_default">8dp</dimen>
+    <dimen name="spacing_regular">12dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="rv_margin_vertical">32dp</dimen>
 
