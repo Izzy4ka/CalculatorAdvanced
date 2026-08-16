@@ -1,9 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.ktlint)
-    alias(libs.plugins.detekt)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.calculator.linters)
 }
 
 android {
@@ -38,18 +37,9 @@ android {
     }
 }
 
-ktlint {
-    android.set(true)
-    ignoreFailures.set(false)
-}
-
-detekt {
-    buildUponDefaultConfig = true
-    allRules = false
-    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
-}
-
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
     // Android UI & XML
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
