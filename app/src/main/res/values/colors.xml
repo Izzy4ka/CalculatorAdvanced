@@ -12,4 +12,6 @@
     <color name="hint_gray">#AAAAAA</color>
     <color name="hint_active_orange">#FF8C00</color>
     <color name="golden_orange">#E68900</color>
+    <color name="tab_text_active">#FFFFFF</color>
+    <color name="tab_text_inactive">#A0A0A0</color>
 </resources>

@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlin.math.abs
 
 class PullToHistoryLayout
     @JvmOverloads
@@ -26,6 +27,7 @@ class PullToHistoryLayout
 
         private var config: Config? = null
 
+        private var initialX = 0f
         private var initialY = 0f
         private var isDragging = false
         private var currentDragValue = 0f
@@ -45,14 +47,19 @@ class PullToHistoryLayout
 
             when (ev.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    initialX = ev.rawX
                     initialY = ev.rawY
                     isDragging = false
                 }
 
                 MotionEvent.ACTION_MOVE -> {
+                    val deltaX = ev.rawX - initialX
                     val deltaY = ev.rawY - initialY
-                    if (deltaY > touchSlop) {
+
+                    if (deltaY > touchSlop && abs(deltaY) > abs(deltaX)) {
                         isDragging = true
+
+                        parent?.requestDisallowInterceptTouchEvent(true)
                         return true
                     }
                 }
