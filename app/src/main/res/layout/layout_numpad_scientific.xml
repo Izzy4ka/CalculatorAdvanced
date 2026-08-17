@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_expand"
+        style="@style/CalcButton.Icon"
+        android:contentDescription="@string/calculator_button_expand"
+        app:icon="@drawable/ic_transform" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_e"
+        style="@style/CalcButton.Number"
+        android:text="@string/scientific_button_euler_number" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pi"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_pi" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_inv"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_reciprocal" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_fact"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_factorial" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_2nd"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_second_function" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_deg"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_degree" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sin"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_sine" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cos"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_cosine" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_tan"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_tangent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pow"
+        style="@style/CalcButton.Icon"
+        app:icon="@drawable/ic_exponent"
+        app:iconTint="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_lg"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_logarithm" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ln"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_natural_logarithm" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_open"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_open_parenthesis" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_close"
+        style="@style/CalcButton"
+        android:text="@string/scientific_button_close_parenthesis" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sqrt"
+        style="@style/CalcButton.Icon"
+        app:icon="@drawable/ic_square_root_of_x"
+        app:iconTint="@color/white" />
+</merge>
