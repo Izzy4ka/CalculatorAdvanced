@@ -21,6 +21,8 @@ import androidx.transition.TransitionSet
 import com.example.calculator.R
 import com.example.calculator.core.utils.TextSafeTransition
 import com.example.calculator.databinding.FragmentCalculatorBinding
+import com.example.calculator.databinding.LayoutNumpadBasicBinding
+import com.example.calculator.databinding.LayoutNumpadScientificBinding
 import com.example.calculator.feature.calculator.adapter.CalculateAdapter
 import com.example.calculator.feature.calculator.view.PullToHistoryLayout
 import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
@@ -31,6 +33,12 @@ import kotlinx.coroutines.launch
 class CalculatorFragment : Fragment() {
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
+
+    private var _basicPadBinding: LayoutNumpadBasicBinding? = null
+    private val basicPadBinding get() = requireNotNull(_basicPadBinding) { "Basic pad binding is null" }
+
+    private var _scientificPadBinding: LayoutNumpadScientificBinding? = null
+    private val scientificPadBinding get() = requireNotNull(_scientificPadBinding) { "Scientific pad binding is null" }
 
     private val adapter by lazy { CalculateAdapter() }
     private val viewModel by viewModels<CalculatorViewModel>()
@@ -64,6 +72,9 @@ class CalculatorFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        _basicPadBinding = LayoutNumpadBasicBinding.bind(view)
+        _scientificPadBinding = LayoutNumpadScientificBinding.bind(view)
+
         setupHistory()
 
         if (isExpandableMode) {
@@ -74,6 +85,8 @@ class CalculatorFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _basicPadBinding = null
+        _scientificPadBinding = null
     }
 
     private fun setupExpandableFeatures() {
@@ -112,7 +125,7 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun setupExpandableListeners() {
-        binding.btnExpand.setOnClickListener {
+        scientificPadBinding.btnExpand.setOnClickListener {
             viewModel.toggleKeyboardExpansion()
         }
     }
