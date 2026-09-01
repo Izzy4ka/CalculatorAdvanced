@@ -69,7 +69,7 @@ fun ConverterMenuScreen(
             columns = GridCells.Fixed(3),
             contentPadding = PaddingValues(top = 24.dp, bottom = 24.dp, start = 16.dp, end = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp), // Увеличили расстояние между рядами
+            verticalArrangement = Arrangement.spacedBy(24.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             items(converterCategories) { category ->
