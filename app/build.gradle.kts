@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.calculator.linters)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -34,6 +35,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
