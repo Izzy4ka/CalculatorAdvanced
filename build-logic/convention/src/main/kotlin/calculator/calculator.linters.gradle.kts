@@ -12,6 +12,5 @@ ktlint {
 detekt {
     buildUponDefaultConfig = true
     allRules = false
-    // Обращаемся к корню основного проекта, а не модуля плагина
     config.setFrom(files("${rootProject.projectDir}/config/detekt/detekt.yml"))
 }

@@ -62,4 +62,11 @@
 
     <string name="calc_flow_ratio_collapsed" translatable="false">4:5</string>
     <string name="calc_flow_ratio_expanded" translatable="false">5:7</string>
+
+    <string name="category_length">Длина</string>
+    <string name="category_area">Площадь</string>
+    <string name="category_mass">Масса</string>
+    <string name="category_volume">Объем</string>
+    <string name="category_currency">Валюта</string>
+    <string name="category_time">Время</string>
 </resources>

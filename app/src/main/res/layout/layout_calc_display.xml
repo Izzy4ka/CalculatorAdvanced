@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_pull_hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:alpha="0"
+        android:gravity="center"
+        android:text="@string/pull_to_history"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/rv_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="VisualLintBounds" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/tv_expression"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_calculate" />
+
+    <TextView
+        android:id="@+id/tv_expression"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|end"
+        android:includeFontPadding="false"
+        android:text="@string/calculator_zero"
+        android:textColor="@color/white"
+        android:textSize="@dimen/calculator_expression_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tv_pre_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_pre_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:gravity="bottom|end"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/calculator_result_text_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</merge>

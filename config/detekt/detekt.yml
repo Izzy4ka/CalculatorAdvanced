@@ -134,7 +134,8 @@ complexity:
     active: true
     functionThreshold: 6
     constructorThreshold: 7
-    ignoreDefaultParameters: false
+    ignoreAnnotated: ['Composable']
+    ignoreDefaultParameters: true
     ignoreDataClasses: true
     ignoreAnnotatedParameter: []
   MethodOverloading:
@@ -176,7 +177,7 @@ complexity:
     ignoreDeprecated: false
     ignorePrivate: false
     ignoreOverridden: false
-    ignoreAnnotatedFunctions: []
+    ignoreAnnotatedFunctions: ['Composable', 'Preview']
 
 coroutines:
   active: true
@@ -332,6 +333,7 @@ naming:
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
+    ignoreAnnotated: ['Composable', 'Preview']
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'

@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +23,8 @@ import androidx.transition.TransitionSet
 import com.example.calculator.R
 import com.example.calculator.core.utils.TextSafeTransition
 import com.example.calculator.databinding.FragmentCalculatorBinding
+import com.example.calculator.databinding.LayoutNumpadBasicBinding
+import com.example.calculator.databinding.LayoutNumpadScientificBinding
 import com.example.calculator.feature.calculator.adapter.CalculateAdapter
 import com.example.calculator.feature.calculator.view.PullToHistoryLayout
 import com.example.calculator.feature.calculator.viewmodel.CalculatorViewModel
@@ -31,6 +35,12 @@ import kotlinx.coroutines.launch
 class CalculatorFragment : Fragment() {
     private var _binding: FragmentCalculatorBinding? = null
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
+
+    private var _basicPadBinding: LayoutNumpadBasicBinding? = null
+    // private val basicPadBinding get() = requireNotNull(_basicPadBinding) { "Basic pad binding is null" }
+
+    private var _scientificPadBinding: LayoutNumpadScientificBinding? = null
+    private val scientificPadBinding get() = requireNotNull(_scientificPadBinding) { "Scientific pad binding is null" }
 
     private val adapter by lazy { CalculateAdapter() }
     private val viewModel by viewModels<CalculatorViewModel>()
@@ -50,6 +60,13 @@ class CalculatorFragment : Fragment() {
         -resources.getDimension(R.dimen.hint_start_offset)
     }
 
+    private val basicPadListener =
+        View.OnClickListener {
+            Toast
+                .makeText(requireContext(), (it as MaterialButton).text.toString(), Toast.LENGTH_SHORT)
+                .show()
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +81,9 @@ class CalculatorFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        _basicPadBinding = LayoutNumpadBasicBinding.bind(view)
+        _scientificPadBinding = LayoutNumpadScientificBinding.bind(view)
+
         setupHistory()
 
         if (isExpandableMode) {
@@ -74,10 +94,12 @@ class CalculatorFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _basicPadBinding = null
+        _scientificPadBinding = null
     }
 
     private fun setupExpandableFeatures() {
-        setupExpandableListeners()
+        setupBtnListeners()
         setupPullToHistoryLogic()
         observeExpandableViewModel()
     }
@@ -111,8 +133,14 @@ class CalculatorFragment : Fragment() {
         binding.pullToHistoryLayout?.setup(config)
     }
 
-    private fun setupExpandableListeners() {
-        binding.btnExpand.setOnClickListener {
+    private fun setupBtnListeners() {
+        (binding.root as ViewGroup).forEach { view ->
+            if (view is MaterialButton) {
+                view.setOnClickListener(basicPadListener)
+            }
+        }
+
+        scientificPadBinding.btnExpand.setOnClickListener {
             viewModel.toggleKeyboardExpansion()
         }
     }
