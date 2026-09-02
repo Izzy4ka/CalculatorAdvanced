@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:function-naming", "MagicNumber")
+
 package com.example.calculator.feature.converter.fragment
 
 import android.os.Bundle

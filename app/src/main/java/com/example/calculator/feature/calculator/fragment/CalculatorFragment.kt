@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,7 +37,7 @@ class CalculatorFragment : Fragment() {
     private val binding get() = requireNotNull(_binding) { "Binding is null" }
 
     private var _basicPadBinding: LayoutNumpadBasicBinding? = null
-    private val basicPadBinding get() = requireNotNull(_basicPadBinding) { "Basic pad binding is null" }
+    // private val basicPadBinding get() = requireNotNull(_basicPadBinding) { "Basic pad binding is null" }
 
     private var _scientificPadBinding: LayoutNumpadScientificBinding? = null
     private val scientificPadBinding get() = requireNotNull(_scientificPadBinding) { "Scientific pad binding is null" }
@@ -57,6 +59,13 @@ class CalculatorFragment : Fragment() {
     private val hintStartOffsetPx by lazy {
         -resources.getDimension(R.dimen.hint_start_offset)
     }
+
+    private val basicPadListener =
+        View.OnClickListener {
+            Toast
+                .makeText(requireContext(), (it as MaterialButton).text.toString(), Toast.LENGTH_SHORT)
+                .show()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,7 +99,7 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun setupExpandableFeatures() {
-        setupExpandableListeners()
+        setupBtnListeners()
         setupPullToHistoryLogic()
         observeExpandableViewModel()
     }
@@ -124,7 +133,13 @@ class CalculatorFragment : Fragment() {
         binding.pullToHistoryLayout?.setup(config)
     }
 
-    private fun setupExpandableListeners() {
+    private fun setupBtnListeners() {
+        (binding.root as ViewGroup).forEach { view ->
+            if (view is MaterialButton) {
+                view.setOnClickListener(basicPadListener)
+            }
+        }
+
         scientificPadBinding.btnExpand.setOnClickListener {
             viewModel.toggleKeyboardExpansion()
         }
