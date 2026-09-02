@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.calculator.R
 import com.example.calculator.databinding.FragmentMainNavHostBinding
@@ -147,6 +148,13 @@ class MainHostFragment : Fragment() {
         binding.viewPager.adapter =
             MainPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
         binding.viewPager.registerOnPageChangeCallback(onPageChangeCallback)
+        binding.viewPager.offscreenPageLimit = 1
+
+        val recyclerView = binding.viewPager.getChildAt(0) as? RecyclerView
+        recyclerView?.apply {
+            setItemViewCacheSize(2)
+            itemAnimator = null
+        }
     }
 
     private fun switchTabWithAnimation(targetTab: MainTabs) {

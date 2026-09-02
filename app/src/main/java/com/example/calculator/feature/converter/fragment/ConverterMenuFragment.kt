@@ -30,6 +30,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.calculator.ui.theme.CalculatorTheme
@@ -42,6 +43,7 @@ class ConverterMenuFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 CalculatorTheme {
                     ConverterMenuScreen(
