@@ -18,6 +18,7 @@ dependencies {
     implementation(libs.javax.inject)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
