@@ -17,9 +17,9 @@ class ExpressionLexerImplTest {
     fun tokenize_simpleAddition_returnsCorrectTokens() {
         val input = "2 + 2"
         val expected = listOf(
-            Token.Number(2.0),
+            Token.Number("2"),
             Token.Operator.Plus,
-            Token.Number(2.0)
+            Token.Number("2")
         )
 
         val actual = lexer.tokenize(input)
@@ -31,9 +31,9 @@ class ExpressionLexerImplTest {
     fun tokenize_decimalNumbersAndSpaces_returnsCorrectTokens() {
         val input = "  12.5   *  0.4 "
         val expected = listOf(
-            Token.Number(12.5),
+            Token.Number("12.5"),
             Token.Operator.Multiply,
-            Token.Number(0.4)
+            Token.Number("0.4")
         )
 
         val actual = lexer.tokenize(input)
@@ -47,7 +47,7 @@ class ExpressionLexerImplTest {
         val expected = listOf(
             Token.Function.SIN,
             Token.Bracket.Left,
-            Token.Number(30.0),
+            Token.Number("30"),
             Token.Bracket.Right
         )
 
@@ -84,7 +84,7 @@ class ExpressionLexerImplTest {
     @Test
     fun tokenize_leadingDot_returnsCorrectNumber() {
         val tokens = lexer.tokenize(".5 + 1")
-        assertEquals(Token.Number(0.5), tokens[0])
+        assertEquals(Token.Number(".5"), tokens[0])
     }
 
     @Test
