@@ -79,7 +79,8 @@ class ExpressionLexerImpl : ExpressionLexer {
 
                 if (isScientific) {
                     val baseNumber = expression.substring(startPosition, position)
-                    if (baseNumber.isEmpty() || baseNumber == ".") {
+
+                    if (baseNumber == ".") {
                         throw IllegalArgumentException("Invalid scientific format: missing base")
                     }
 
@@ -98,7 +99,13 @@ class ExpressionLexerImpl : ExpressionLexer {
         }
 
         if (position > startPosition) {
-            tokens.add(Token.Number(expression.substring(startPosition, position)))
+            val finalNumber = expression.substring(startPosition, position)
+
+            if (finalNumber == ".") {
+                throw IllegalArgumentException("Invalid number format: standalone dot")
+            }
+
+            tokens.add(Token.Number(finalNumber))
         }
 
         return position
