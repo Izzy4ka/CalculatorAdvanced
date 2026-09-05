@@ -32,7 +32,8 @@ class ExpressionParserImpl : ExpressionParser {
     private fun parsePrimary(): ExpressionNode {
         val numberToken = match<Token.Number>()
         if (numberToken != null) {
-            return ExpressionNode.NumberNode(numberToken.value)
+            val result = MathNumberResolver.resolve(numberToken.value)
+            return ExpressionNode.NumberNode(result)
         }
 
         val leftBracket = match<Token.Bracket.Left>()
@@ -54,7 +55,14 @@ class ExpressionParserImpl : ExpressionParser {
             val innerNode = parseExpression()
             match<Token.Bracket.Right>()
                 ?: throw IllegalArgumentException("Expected closing parenthesis ')'")
-            return ExpressionNode.FunctionNode(functionToken, innerNode)
+            return ExpressionNode.FunctionNode(functionToken.toDomain(), innerNode)
+        }
+
+        val constantToken = match<Token.Constant>()
+
+        if (constantToken != null) {
+            val result = MathNumberResolver.resolveConstant(constantToken.toDomain())
+            return ExpressionNode.NumberNode(result)
         }
 
         throw IllegalArgumentException("Expected a number or opening parenthesis, but found: ${peek()}")
@@ -68,7 +76,7 @@ class ExpressionParserImpl : ExpressionParser {
                 ?: break
 
             val right = parsePower()
-            left = ExpressionNode.BinaryNode(left, operator, right)
+            left = ExpressionNode.BinaryNode(left, operator.toDomain(), right)
         }
 
         return left
@@ -83,7 +91,7 @@ class ExpressionParserImpl : ExpressionParser {
                 ?: break
 
             val right = parseMultiplication()
-            left = ExpressionNode.BinaryNode(left, operator, right)
+            left = ExpressionNode.BinaryNode(left, operator.toDomain(), right)
         }
 
         return left
@@ -95,7 +103,7 @@ class ExpressionParserImpl : ExpressionParser {
         val operator = match<Token.Operator.Power>()
         if (operator != null) {
             val right = parsePower()
-            return ExpressionNode.BinaryNode(left, operator, right)
+            return ExpressionNode.BinaryNode(left, operator.toDomain(), right)
         }
 
         return left
@@ -105,7 +113,7 @@ class ExpressionParserImpl : ExpressionParser {
         val operator =
             match<Token.Operator.Minus>() ?: match<Token.Operator.Plus>() ?: return parsePrimary()
         val operand = parseUnary()
-        return ExpressionNode.UnaryNode(operator, operand)
+        return ExpressionNode.UnaryNode(operator.toDomain(), operand)
     }
 
 
