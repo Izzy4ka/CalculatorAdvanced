@@ -1,11 +1,14 @@
 package com.example.calculator.domain.math.lexer
 
 class ExpressionLexerImpl : ExpressionLexer {
-    private val functionsMap = Token.Function.entries.associateBy { it.name.lowercase() }
-    private val constantsMap = Token.Constant.entries.associateBy { it.name.lowercase() }
+    private val functionNames = Token.Function.entries.map { it.name.lowercase() }.toTypedArray()
+    private val functionTokens = Token.Function.entries.toTypedArray()
+
+    private val constantNames = Token.Constant.entries.map { it.name.lowercase() }.toTypedArray()
+    private val constantTokens = Token.Constant.entries.toTypedArray()
 
     override fun tokenize(expression: String): List<Token> {
-        val tokens = mutableListOf<Token>()
+        val tokens = ArrayList<Token>(expression.length / 2)
         var position = 0
 
         while (position < expression.length) {
@@ -116,21 +119,44 @@ class ExpressionLexerImpl : ExpressionLexer {
         startPosition: Int,
         tokens: MutableList<Token>
     ): Int {
-        var position = startPosition
-        while (position < expression.length && expression[position].isLetter()) {
-            position++
+        var endPosition = startPosition
+        while (endPosition < expression.length && expression[endPosition].isLetter()) {
+            endPosition++
         }
 
-        val word = expression.substring(startPosition, position).lowercase()
+        var currentPos = startPosition
 
-        val token = functionsMap[word] ?: constantsMap[word]
+        while (currentPos < endPosition) {
+            var matchFound = false
 
-        if (token != null) {
-            tokens.add(token)
-        } else {
-            throw IllegalArgumentException("Unknown function or constant: $word")
+            for (i in functionNames.indices) {
+                val name = functionNames[i]
+                if (expression.regionMatches(currentPos, name, 0, name.length, ignoreCase = true)) {
+                    tokens.add(functionTokens[i])
+                    currentPos += name.length
+                    matchFound = true
+                    break
+                }
+            }
+
+            if (matchFound) continue
+
+            for (i in constantNames.indices) {
+                val name = constantNames[i]
+                if (expression.regionMatches(currentPos, name, 0, name.length, ignoreCase = true)) {
+                    tokens.add(constantTokens[i])
+                    currentPos += name.length
+                    matchFound = true
+                    break
+                }
+            }
+
+            if (!matchFound) {
+                val errorSnippet = expression.substring(currentPos, endPosition)
+                throw IllegalArgumentException("Unknown function or constant near: $errorSnippet")
+            }
         }
 
-        return position
+        return endPosition
     }
 }
