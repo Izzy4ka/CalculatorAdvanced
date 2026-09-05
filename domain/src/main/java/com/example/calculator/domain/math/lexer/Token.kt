@@ -1,7 +1,7 @@
 package com.example.calculator.domain.math.lexer
 
 sealed interface Token {
-    data class Number(val value: Double) : Token
+    data class Number(val value: String) : Token
 
     sealed interface Operator : Token {
         data object Plus : Operator
@@ -18,5 +18,9 @@ sealed interface Token {
 
     enum class Function : Token {
         SIN, COS, TAN, LOG, LN, SQRT;
+    }
+
+    enum class Constant : Token {
+        E, PI;
     }
 }
