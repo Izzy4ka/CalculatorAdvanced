@@ -92,4 +92,74 @@ class ExpressionLexerImplTest {
         val tokens = lexer.tokenize("    ")
         assertEquals(emptyList<Token>(), tokens)
     }
+
+    @Test
+    fun tokenize_scientificNotationPositive_returnsSyntacticSugar() {
+        val tokens = lexer.tokenize("15e2")
+
+        val expected = listOf(
+            Token.Number("15"),
+            Token.Operator.Multiply,
+            Token.Number("10"),
+            Token.Operator.Power,
+            Token.Number("2")
+        )
+
+        assertEquals(expected, tokens)
+    }
+
+    @Test
+    fun tokenize_scientificNotationNegative_returnsSyntacticSugar() {
+        val tokens = lexer.tokenize("1.5e-3")
+
+        val expected = listOf(
+            Token.Number("1.5"),
+            Token.Operator.Multiply,
+            Token.Number("10"),
+            Token.Operator.Power,
+            Token.Operator.Minus,
+            Token.Number("3")
+        )
+
+        assertEquals(expected, tokens)
+    }
+
+    @Test
+    fun tokenize_constantAttachedToNumber_returnsNumberAndConstant() {
+        val tokens = lexer.tokenize("15pi")
+        val expected = listOf(
+            Token.Number("15"),
+            Token.Constant.PI
+        )
+
+        assertEquals(expected, tokens)
+    }
+
+    @Test
+    fun tokenize_multipleConstants_returnsSequentialConstants() {
+        val tokens = lexer.tokenize("2ee")
+        val expected = listOf(
+            Token.Number("2"),
+            Token.Constant.E,
+            Token.Constant.E
+        )
+
+        assertEquals(expected, tokens)
+    }
+
+    @Test
+    fun tokenize_mixedConstantsAndFunctions_returnsCorrectTokens() {
+        val tokens = lexer.tokenize("pi*sin(e)")
+        val expected = listOf(
+            Token.Constant.PI,
+            Token.Operator.Multiply,
+            Token.Function.SIN,
+            Token.Bracket.Left,
+            Token.Constant.E,
+            Token.Bracket.Right
+        )
+
+        assertEquals(expected, tokens)
+    }
+
 }
